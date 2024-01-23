@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title> Gund Gallery Experience</title>
+
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+
+
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/GalleryLanding.css"type="text/css" rel="stylesheet" />
+    </head>
+
+    <body>
+        <div class = body>
+        <div class="background-image">
+            <img src= "gund_img/gund2.jpeg">
+            <div class = "login-info">
+              <p>A Gund Gallery member? Log in <a href="#" onclick="document.getElementById('admin').style.display='block'">here</a>.</p>
+              </div>
+            <div id ="admin" class = "wrapper animate">
+              <div class = "form-box login">
+                <h2>Log in</h2>
+               <!-- <form action="#"> -->
+                <div class = "input-box">
+                  <span class = "icon"></span>
+                  <input type="text" name="username" id="uname" required>
+                  <label for="uname"><b>Username</b></label>
+                  </div>
+                <div class = "input-box">
+                  <span class = "icon"></span>
+                  <input type="password" name="password" id="pword" required>
+                  <label for="psw"><b>Password</b></label>
+                  </div>
+                <button type class="btn" id="admin-login">Log in</button>
+                <div class="login-goback">
+                  <p>I don't want to log in. <a href="#" class = "goback" onclick="document.getElementById('admin').style.display='none'">Go back</a></p>
+                  </div>
+                <!-- </form> -->
+                </div> 
+              </div>
+        </div>
+      </div>
+        <div class = "content-section">
+            <h1> Thank you for visiting <br> Gund Gallery</h1>
+            <p>Celebrate the power of art at Kenyon College. </p>
+            <div class = "button"> 
+                <a href="EmotionResponse.html">Tell us your experience!</a>
+            </div>
+        </div>
+        <script src="LandingPage.js"></script>
+    </body>
+</html>

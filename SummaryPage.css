@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+
+body{
+	overflow: hidden;
+}
+
+canvas {
+	width: 100%;
+	height: 70vh;
+}
+
+/* 
+.main h1{
+	font-family: Poppins;
+	text-align: center;
+	position: center;
+}
+ */
+
+.button{
+    margin-top: 25px;
+	text-align: center;
+	font-family: Poppins;
+}
+
+.button a{
+    text-decoration: none;
+    font-size: 18px;
+    color: #fff;
+    display: inline-block;
+    background-color: #606c38;
+    border-radius: 5px;
+    padding: 10px 15px;
+    letter-spacing: 1.5px;
+}
+
+.button a:hover{
+    background-color: #283618;
+    transition: 0.5s ease;
+}

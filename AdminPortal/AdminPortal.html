@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <!-- Bootstrap CSS -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+      <title>Gund Gallery Art Pieces</title>
+   </head>
+   <body>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+         <div class="container-fluid">
+            <a class="navbar-brand" href="#">Gund Gallery Admin Portal</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+               <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active">
+                     <a class="nav-link" href="GalleryLanding.html">Gund Gallery</a>
+                  </li>
+               </ul>
+               <form class="d-flex" role="search">
+                  <input id="search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                  <button id="filter-btn" class="btn btn-outline-success" type="button">Filter</button>
+                  <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#InputArt">Add</button>
+               </form>
+            </div>
+         </div>
+      </nav>
+      <hr>
+      <div class="jumbotron">
+         <div class="container results">
+            <div id="searchresults"></div>
+         </div>
+      </div>
+      <!-- Add Modal -->
+      <div class="modal fade" id="InputArt" tabindex="-1" aria-labelledby="InputArt" aria-hidden="true">
+         <div class="modal-dialog d-flex justify-content-center">
+            <div class="modal-content w-75">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="AddArt">Add an art piece</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body p-4">
+                  <form>
+                     <!-- Name input -->
+                     <div class="form-outline mb-1">
+                        <input type="text" id="addname" class="form-control">
+                        <label class="form-label" for="addname">Art Name</label>
+						</div>
+                     <!-- Link input -->
+                     <div class="form-outline mb-1">
+                        <input type="text" id="addlink" class="form-control">
+                        <label class="form-label" for="addlink">Art Link</label>
+                     </div>
+                     <br>
+                     <!-- Submit button -->
+                     <button type="button" class="btn btn-primary btn-block" data-bs-dismiss="modal" onclick="addArtPiece()">Save</button>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Edit Modal -->
+      <div class="modal fade" id="editArt" tabindex="-1" aria-labelledby="editArt" aria-hidden="true">
+         <div class="modal-dialog d-flex justify-content-center">
+            <div class="modal-content w-75">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="EditArt">Edit an entry</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body p-4">
+                  <form>
+                     <!-- First input -->
+                     <div class="form-outline mb-1">
+                        <input type="text" id="editname" class="form-control">
+                        <label class="form-label" for="editname">Art Name</label>
+                     </div>
+                     <!-- Second input -->
+                     <div class="form-outline mb-1">
+                        <input type="text" id="editlink" class="form-control">
+                        <label class="form-label" for="editname">Art Image Link</label>
+                     </div>
+                     <!-- Submit button -->
+                     <button type="submit" class="btn btn-primary btn-block" data-bs-dismiss="modal" onclick="updateArt()">Save</button>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+	  <div class="modal fade" id="EditArt" tabindex="-1" aria-labelledby="EditArt" aria-hidden="true">
+         <div class="modal-dialog d-flex justify-content-center">
+            <div class="modal-content w-75">
+               <div class="modal-header">
+                  <h5 class="modal-title">Edit an art piece</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body p-4">
+                  <form>
+                     <!-- Name input -->
+                     <div class="form-outline mb-1">
+                        <input type="text" id="editname" class="form-control">
+                        <label class="form-label" for="editname">Art Name</label>
+                     </div>
+                     <!-- Link input -->
+                     <div class="form-outline mb-1">
+                        <input type="text" id="editlink" class="form-control">
+                        <label class="form-label" for="editlink">Art Link</label>
+                     </div>
+                     <br>
+                     <!-- Submit button -->
+                     <button type="submit" class="btn btn-primary btn-block" data-bs-dismiss="modal" onclick="updateArt()">Save</button>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- jQuery first, then sweetalert2, then Bootstrap JS, then our js -->
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js" ></script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+      <script src="adminPortal.js"></script>
+   </body>
+</html>

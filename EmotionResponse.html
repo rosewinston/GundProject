@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Art Piece Feedback</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Font Mfizz-->
+        <link href="font-mfizz-2.4.1/font-mfizz.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/ColorResponse.css"type="text/css" rel="stylesheet" />
+    </head>
+    
+    <body>
+        <div class="container">
+            <div class="flex-container">
+                <div class="carousel-container">
+                    <div class="slider-wrapper">
+                        <div class="slider">
+                            <img id="slide-1" src="gund_img/gund1.jpeg" alt="img" draggable="false">
+                            <img id="slide-2" src="gund_img/gund2.jpeg" alt="img" draggable="false">
+                            <img id="slide-3" src="gund_img/gund3.jpeg" alt="img" draggable="false">
+                        </div>
+                    </div>
+                    <div class="slider-nav">
+                        <a href="#slider-1"></a>
+                        <a href="#slider-2"></a>
+                        <a href="#slider-3"></a>
+                    </div>
+                </div>
+                <!-- INFORMATION CONTAINER -->
+                <div class="information-container">
+                    <div class="selector-container">
+                        <div class="select">
+                            <select name="slct" id="slct">
+ 
+                            </select>
+                        </div>
+                    </div> <!-- End of select button to choose art piece-->
+                    <div class="selected-information-container">
+                        <p>This is a placeholder art selection from the Gund Gallery Collections webpage, feel free to visit the rest of the art at https://collection.gundgallery.org .</p>
+                    </div> <!-- End of display for the selected art piece information-->
+                    <div class="rate-container">
+                        <div class="word-box dropdown text-center" data-dropdown>
+                            <p>How do you think about this<br> art piece?</p>
+                            <button class="choose-button" onclick="document.getElementById('popup').style.display='block'">Choose an emoji here!</button>
+                        </div>
+                        <div id="popup">
+                            <div class="popup-content">
+                                <p>Choose an emoji that matches with what you feel about the piece!</p>
+                                
+                                <div id="emoji-container">
+                                	<div id="row-1">
+                                		<div href="#" class="link" id="loved">&#128525;</div>
+                                		<div href="#" class="link" id="funny">&#128514;</div>
+                                		<div href="#" class="link" id="confused">&#129300;</div>
+                                		<div href="#" class="link" id="sad">&#128546;</div>
+                                		<div href="#" class="link" id="angry">&#128544;</div>
+                                	</div>
+                                	<div id="row-2">
+                                		<div href="#" class="link" id="surprise">&#128558;</div>
+                                		<div href="#" class="link" id="fearful">&#128561;</div>
+                                		<div href="#" class="link" id="happy">&#128522;</div>
+                                		<div href="#" class="link" id="amazed">&#128518;</div>
+                                		<div href="#" class="link" id="bored">&#128580;</div>
+                                	</div>
+                                </div>
+                                <div class="popup-buttons">
+                                    <a href="#" class="next-page" onclick="document.getElementById('popup').style.display='none'">Rate another piece</a>
+                                    <a href="SummaryPage.html" class="next-page">Next</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> <!-- End of the container to rate the art piece-->
+            
+                </div> <!-- End of information container -->
+                
+            </div>
+            
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+            <!-- Core theme JS-->
+            <script src="EmotionResponse.js"></script>
+        </div>
+    </body>
+
+    </html>
