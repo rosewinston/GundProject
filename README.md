@@ -4,7 +4,7 @@ A program that interacts with a database to take in user input in the form of wo
 
 To ready the program for use on an ubuntu server enter these following commands:
 - ```sudo mkdir /var/www/html/gallery```
-- ```sudo chown ubuntu /var/www/html/gallery```
+- ```sudo chown [username] /var/www/html/gallery```
 - ```make```
 - ```./gallery```
 
@@ -17,7 +17,4 @@ In the admin portal enter the name of an art piece in the gallery, and add the i
 When the program is running, all inputs will be automatically added to the database, the visualization pieces automatically take all the data from today's date for the whole gallery, and the data on the individual piece for the entire exhibition.
 
 If you have any other questions, or have errors with the code feel free to email
-vu1@kenyon.edu
 winston1@kenyon.edu
-polak2@kenyon.edu
-nguyen3@kenyon.edu
