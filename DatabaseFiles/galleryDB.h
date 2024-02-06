@@ -11,7 +11,7 @@
 
 #include "emotionEntry.h"
 #include "wordEntry.h"
-#include "artEntry.h"
+#include "exhibitionEntry.h"
 
 #ifndef GALLERYDB_H
 #define GALLERYDB_H
@@ -35,9 +35,9 @@ public:
     // function to get all art names
     map<string, string> getAllArts(vector<string> &artList, vector<string> &artLink);
     //find art pieces matching string
-    vector<artEntry> find(string search);
+    vector<exhibitionEntry> find(string search);
     //get art piece that matches with the ID given
-    artEntry fetchArt(string id);
+    exhibitionEntry fetchArt(string id);
     // add art piece to DB
     void addEntry(string name, string link);
     //edit art piece name in DB
