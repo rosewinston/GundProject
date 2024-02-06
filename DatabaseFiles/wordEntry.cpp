@@ -3,16 +3,16 @@
 wordEntry::wordEntry() {
 }
 
-wordEntry::wordEntry(sql::SQLString id, sql::SQLString timestamp, sql::SQLString word) {
+wordEntry::wordEntry(sql::SQLString id, sql::SQLString exhibition, sql::SQLString word) {
     this->id = id;
-    this->timestamp = timestamp;
+    this->exhibition = exhibition;
     this->word = word;
  
 }
 
 string wordEntry::text() {
 	string result = id + ". ";
-	result += timestamp + " ";
+	result += exhibition + " ";
 	result += word;
 	return result;
 
@@ -20,7 +20,7 @@ string wordEntry::text() {
 
 string wordEntry::json() {
 	string result = "{\"id\":\"" + id + "\",";
-	result += "\"timestamp\":\"" + timestamp + "\",";
+	result += "\"exhibition\":\"" + exhibition + "\",";
 	result += "\"word\":\"" + word + "\"}";
 	return result;
 }
