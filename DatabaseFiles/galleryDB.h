@@ -38,7 +38,7 @@ public:
     vector<exhibitionEntry> find(string search);
     //get exhibition that matches with the ID given
     exhibitionEntry fetchExhibition(string id);
-    // add exhibition piece to DB
+    // add exhibition to DB
     void addEntry(string name, string link);
     //edit exhibition name in DB
     void editEntry(string idnum,string name,string link);
