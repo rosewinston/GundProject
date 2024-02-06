@@ -1,6 +1,6 @@
-//Admin Portal for Gund Gallery ArtDB
-var artList = [];
-const baseUrl = 'http://54.81.146.159:5005';
+//Admin Portal for Gund Gallery exhibitionDB
+var exhibitionList = [];
+const baseUrl = '138.28.162.217:5005';
 const imageUrl = "https://collection.thegund.org/Media/images/"
 
 /* Set up events */
@@ -20,7 +20,7 @@ $(document).ready(function() {
 
 });
 
-/* Search and display art functions */
+/* Search and display exhibition functions */
 
 // Build output table from comma delimited list
 function formatMatches(json) {
@@ -28,8 +28,8 @@ function formatMatches(json) {
     var result = '<table class="table table-success table-striped""><tr><th>Name</th><th>Link</th><th>Action</th><tr>';
     json.forEach(function(entry, i) {
         result += "<tr><td class='Name'>" + entry['Name'] + "</td><td class='Link'>" + entry['Link'];
-        result += "<td><button type='button' class='btn btn-primary btn-sm edit' data-bs-toggle='modal' data-bs-target='#editArt' ";
-        result += "onclick=\"editArt(" + i + ")\">Edit</button> ";
+        result += "<td><button type='button' class='btn btn-primary btn-sm edit' data-bs-toggle='modal' data-bs-target='#editExhibition' ";
+        result += "onclick=\"editExhibition(" + i + ")\">Edit</button> ";
         result += "<button type='button' class='btn btn-primary btn-sm ' onclick=\"deleteEntry("+ entry['ID'] +")\">Delete</button></td></tr>";
     });
     result += "</table>";
@@ -39,9 +39,9 @@ function formatMatches(json) {
 
 function displayMatches(results) {
 
-    artList = results["results"];
-    console.log("Results:"+JSON.stringify(artList));
-    document.getElementById("searchresults").innerHTML = formatMatches(artList);
+    exhibitionList = results["results"];
+    console.log("Results:"+JSON.stringify(exhibitionList));
+    document.getElementById("searchresults").innerHTML = formatMatches(exhibitionList);
     
 }
 
@@ -51,7 +51,7 @@ function findMatches(search) {
     if (search != "") search = "/" + search;
 
 	console.log("Search:" + search);
-    fetch(baseUrl + '/art/find' + search, {
+    fetch(baseUrl + '/exhibition/find' + search, {
             method: 'get'
         })
         .then(response => response.json())
@@ -63,7 +63,7 @@ function findMatches(search) {
         })
 }
 
-/* Add art piece functions */
+/* Add exhibition functions */
 function processAdd(results) {
     console.log("Add:", results["status"]);
 	if (results["status"]=="success"){
@@ -76,11 +76,11 @@ function processAdd(results) {
 
 }
 
-function addArtPiece() {
+function addExhibition() {
     console.log("Attempting to add an entry");
-    console.log("Artname:" + $('#addname').val());
+    console.log("Exhibitionname:" + $('#addname').val());
     $('#searchresults').empty();
-    fetch(baseUrl + '/art/add/' + document.getElementById("addname").value + "/" + document.getElementById("addlink").value, {
+    fetch(baseUrl + '/exhibition/add/' + document.getElementById("addname").value + "/" + document.getElementById("addlink").value, {
             method: 'get'
         })
         .then(response => response.json())
@@ -93,29 +93,29 @@ function addArtPiece() {
 }
 
 
-function editArt(row) {
-    console.log("start edit data: "+row+JSON.stringify(artList[row]));
-    console.log("Name of record: " + artList[row]["Name"]);
-    editid = artList[row]["ID"];
+function editExhibition(row) {
+    console.log("start edit data: "+row+JSON.stringify(exhibitionList[row]));
+    console.log("Name of record: " + exhibitionList[row]["Name"]);
+    editid = exhibitionList[row]["ID"];
 	
-	document.getElementById("editname").value = artList[row]["Name"];
-	document.getElementById("editlink").value = artList[row]["Link"];
+	document.getElementById("editname").value = exhibitionList[row]["Name"];
+	document.getElementById("editlink").value = exhibitionList[row]["Link"];
 	
 	//Save ID in modal
-	var modal = document.querySelector("#editArt");
+	var modal = document.querySelector("#editExhibition");
 	modal.setAttribute("editid",editid);
 }
 
 
-function updateArt() {
+function updateExhibition() {
 
 	// Get ID in the modal
-	var modal = document.querySelector("#editArt");
+	var modal = document.querySelector("#editExhibition");
 	id = modal.getAttribute("editid");
 	
     console.log("Attempting to edit an entry:"+id); 
 
-    fetch(baseUrl + '/art/update/' + id + '/' + document.getElementById("editname").value + '/' + document.getElementById("editlink").value, {
+    fetch(baseUrl + '/exhibition/update/' + id + '/' + document.getElementById("editname").value + '/' + document.getElementById("editlink").value, {
                 method: 'get'
             })
         .then(alert("Record for " + document.getElementById("editname").value + " updated"))
@@ -133,7 +133,7 @@ function updateArt() {
 function deleteEntry(id) {
 
     console.log("Attempting to delete an entry:" + id);
-    fetch(baseUrl + '/art/delete/' + id, {
+    fetch(baseUrl + '/exhibition/delete/' + id, {
             method: 'get'
         })
         .then(alert("Deleted Record: " + id))
