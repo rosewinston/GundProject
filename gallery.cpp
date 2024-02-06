@@ -143,29 +143,29 @@ int main(void) {
 	  // });
 
   
-  svr.Get(R"(/response/word/(.*)/(.*))", [&](const Request& req, Response& res) {
-    res.set_header("Access-Control-Allow-Origin","*");
-    string exhibition = req.matches[1];
-    string word = req.matches[2];
-    string result;
-    
-    gldb.addEntryWord(exhibition, word);
-	result = "{\"status\":\"success\",\"exhibition\":\"" + exhibition + "\",\"word\":\"" + word + "\"}";
-    
-    res.set_content(result, "text/json");
-    res.status = 200;
-  });
-	
-  svr.Get(R"(/retrieve/words/(.*))", [&](const httplib::Request& req, httplib::Response& res) {
-    res.set_header("Access-Control-Allow-Origin","*");
+svr.Get(R"(/response/word/(.*)/(.*))", [&](const Request& req, Response& res) {
+res.set_header("Access-Control-Allow-Origin","*");
+string exhibition = req.matches[1];
+string word = req.matches[2];
+string result;
 
-    string exhibition = req.matches[1];
-    vector<string> wordResult = gldb.getWords(exhibition); 
-    string json = getWordJSON(wordResult); 
-	  
-    res.set_content(json, "text/json");
-    res.status = 200;
-  });
+gldb.addEntryWord(exhibition, word);
+result = "{\"status\":\"success\",\"exhibition\":\"" + exhibition + "\",\"word\":\"" + word + "\"}";
+
+res.set_content(result, "text/json");
+res.status = 200;
+});
+
+svr.Get(R"(/retrieve/words/(.*))", [&](const httplib::Request& req, httplib::Response& res) {
+res.set_header("Access-Control-Allow-Origin","*");
+
+string exhibition = req.matches[1];
+vector<string> wordResult = gldb.getWords(exhibition); 
+string json = getWordJSON(wordResult); 
+  
+res.set_content(json, "text/json");
+res.status = 200;
+});
 	
   
  svr.Get(R"(/admin/join/(.*)/(.*))",  [&](const Request& req, Response& res) {
@@ -184,23 +184,23 @@ int main(void) {
     res.status = 200;
   });
 	
-	svr.Get(R"(/exhibition/find)", [&](const httplib::Request& req, httplib::Response& res) {
-    	res.set_header("Access-Control-Allow-Origin","*");
-    	results = gldb.find("");
-    	string json = jsonResults(results);
+svr.Get(R"(/exhibition/find)", [&](const httplib::Request& req, httplib::Response& res) {
+	res.set_header("Access-Control-Allow-Origin","*");
+	results = gldb.find("");
+	string json = jsonResults(results);
 		res.set_content(json, "text/json");
-    	res.status = 200;
-  	});
+	res.status = 200;
+});
 
-	svr.Get(R"(/exhibition/find/(.*))", [&](const httplib::Request& req, httplib::Response& res) {
-    	res.set_header("Access-Control-Allow-Origin","*");
-
-    	string name = req.matches[1];
-    	results = gldb.find(name);
-    	string json = jsonResults(results);
-    	res.set_content(json, "text/json");
-    	res.status = 200;
-  	});
+svr.Get(R"(/exhibition/find/(.*))", [&](const httplib::Request& req, httplib::Response& res) {
+	res.set_header("Access-Control-Allow-Origin","*");
+	
+	string name = req.matches[1];
+	results = gldb.find(name);
+	string json = jsonResults(results);
+	res.set_content(json, "text/json");
+	res.status = 200;
+});
 
 
 svr.Get(R"(/exhibition/add/(.*)/(.*))", [&](const httplib::Request& req, httplib::Response& res) {
