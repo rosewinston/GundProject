@@ -9,7 +9,7 @@
 #include <utility>      // std::pair, std::make_pair
 #include <mariadb/conncpp.hpp>
 
-#include "emotionEntry.h"
+// #include "emotionEntry.h" unused- remove later
 #include "wordEntry.h"
 #include "exhibitionEntry.h"
 
@@ -27,26 +27,26 @@ public:
     //default constructor to create object to allow for interaction w/ database 
     galleryDB();
     //add user's word entry to word table in database 
-    void addEntryWord(string word); 
+    void addEntryWord(string exhibition, string word); 
     //take all words within the database word table entered the day of the given timestamp 
-    vector<string> sumWord(string timestamp); 
+        //vector<string> sumWord(string timestamp); 
     //add user's emotion entry to emotion table in database
-    void addEmotion(string art_piece, string emotion);
-    // function to get all art names
-    map<string, string> getAllArts(vector<string> &artList, vector<string> &artLink);
-    //find art pieces matching string
+        //void addEmotion(string art_piece, string emotion);
+    // function to get all exhibition names
+    map<string, string> getAllExhibitions(vector<string> &exhibitionList, vector<string> &exhibitionLink);
+    //find exhibition matching string
     vector<exhibitionEntry> find(string search);
-    //get art piece that matches with the ID given
-    exhibitionEntry fetchArt(string id);
-    // add art piece to DB
+    //get exhibition that matches with the ID given
+    exhibitionEntry fetchExhibition(string id);
+    // add exhibition piece to DB
     void addEntry(string name, string link);
-    //edit art piece name in DB
+    //edit exhibition name in DB
     void editEntry(string idnum,string name,string link);
-    //delete art piece in DB
+    //delete exhibition in DB
     void deleteEntry(string idnum);
     
     // function to summarize results of emotion responses for each art piece
-    void summaryEmotion(vector<string> &emotionVec, vector<string> &artVec, vector<string> &countVec);
+        //void summaryEmotion(vector<string> &emotionVec, vector<string> &artVec, vector<string> &countVec);
    
     
 private:
