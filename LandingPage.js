@@ -1,4 +1,4 @@
-var baseUrl = 'http://54.81.146.159:5005/';
+var baseUrl = 'http://138.28.162.217:5005/';
 var state="off";
 var myname="";
 var art_piece="";
