@@ -1,22 +1,22 @@
-#include "artEntry.h"
+#include "exhibitionEntry.h"
 
-artEntry::artEntry() {
+exhibitionEntry::exhibitionEntry() {
 }
 
-artEntry::artEntry(sql::SQLString id, sql::SQLString name, sql::SQLString link){
+exhibitionEntry::exhibitionEntry(sql::SQLString id, sql::SQLString name, sql::SQLString link){
     this->ID = id;
     this->Name = name;
     this->Link = link;
 }
 
-string artEntry::text() {
+string exhibitionEntry::text() {
 	string result = ID + ". ";
 	result += Name + " ";
 	result += Link;
 	return result;
 }
 
-string artEntry::json() {
+string exhibitionEntry::json() {
 	string result = "{\"ID\":\"" + ID + "\",";
 	result += "\"Name\":\"" + Name +  "\",";
 	result += "\"Link\":\"" + Link + "\"}";
