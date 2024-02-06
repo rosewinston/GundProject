@@ -8,12 +8,12 @@ using namespace std;
 class wordEntry {
 public:
      wordEntry();
-     wordEntry(sql::SQLString id, sql::SQLString timestamp, sql::SQLString word);
+     wordEntry(sql::SQLString id, sql::SQLString exhibition, sql::SQLString word);
      string text();
      string json();
      
   string id;
-  string timestamp;
+  string exhibition;
   string word;
 
 private:
