@@ -11,8 +11,6 @@ RM= /bin/rm -f
 
 all: PutHTML gallery
 
-emotionEntry.o: DatabaseFiles/emotionEntry.cpp DatabaseFiles/emotionEntry.h
-	$(CC) -c $(CFLAGS) DatabaseFiles/emotionEntry.cpp
 	
 wordEntry.o: DatabaseFiles/wordEntry.cpp DatabaseFiles/wordEntry.h
 	$(CC) -c $(CFLAGS) DatabaseFiles/wordEntry.cpp
@@ -23,23 +21,18 @@ galleryDB.o: DatabaseFiles/galleryDB.cpp DatabaseFiles/galleryDB.h
 gallery.o: gallery.cpp httplib.h
 	$(CC) -c $(CFLAGS) gallery.cpp
 	
-artEntry.o: DatabaseFiles/artEntry.cpp DatabaseFiles/artEntry.h
+exhibitionEntry.o: DatabaseFiles/exhibitionEntry.cpp DatabaseFiles/exhibitionEntry.h
 	$(CC) -c $(CFLAGS) DatabaseFiles/artEntry.cpp
 
-gallery: gallery.o galleryDB.o emotionEntry.o wordEntry.o artEntry.o
-	$(CC) gallery.o galleryDB.o emotionEntry.o wordEntry.o artEntry.o -o gallery -L/usr/local/lib -lmariadbcpp
+gallery: gallery.o galleryDB.o wordEntry.o artEntry.o
+	$(CC) gallery.o galleryDB.o wordEntry.o artEntry.o -o gallery -L/usr/local/lib -lmariadbcpp
 	
 
 
 
 PutHTML:
-	cp EmotionResponse.html /var/www/html/gallery/
-	cp EmotionResponse.js /var/www/html/gallery/
 	cp GalleryFeedback.html /var/www/html/gallery/
 	cp galleryFeedback.js /var/www/html/gallery/
-	cp SummaryPage.html /var/www/html/gallery/
-	cp SummaryPage.css /var/www/html/gallery/
-	cp SummaryPage.js /var/www/html/gallery/
 	cp -R css /var/www/html/gallery/
 	cp gallery.js /var/www/html/gallery/
 	cp GalleryLanding.html /var/www/html/gallery/
@@ -47,8 +40,10 @@ PutHTML:
 	cp -R gund_img /var/www/html/gallery/
 	cp AdminPortal/AdminPortal.html /var/www/html/gallery/
 	cp AdminPortal/adminPortal.js /var/www/html/gallery/
-	
-	cp words.html /var/www/html/gallery/
+	cp words1.html /var/www/html/gallery/
+	cp words2.html /var/www/html/gallery/
+	cp words3.html /var/www/html/gallery/
+	cp words4.html /var/www/html/gallery/
 	cp words.css /var/www/html/gallery/
 	cp words.js /var/www/html/gallery/
 
