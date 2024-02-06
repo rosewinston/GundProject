@@ -58,25 +58,25 @@ void galleryDB::addEntryWord(string exhibition, string word){
 // }
 
 
-// vector<string> galleryDB::sumWord(string timestamp){
-// 	timestamp.append("%");
-// 	string word;
-// 	vector<string> wordList; 
-// 	if (!conn)
-// 	{
-// 		cerr << "Invalid database connection" << endl;
-// 		exit(EXIT_FAILURE);
-// 	}
-// 	std::auto_ptr<sql::Statement> stmnt(conn->createStatement());
-// 	sql::ResultSet *res = stmnt->executeQuery("SELECT word FROM word_response WHERE timestamp like '" + timestamp + "'");
-// 	while (res->next())
-// 	{
-// 		word = res->getString("word");
-// 		wordList.push_back(word); 
+vector<string> galleryDB::getWords(string exhibition){
+	timestamp.append("%");
+	string word;
+	vector<string> wordList; 
+	if (!conn)
+	{
+		cerr << "Invalid database connection" << endl;
+		exit(EXIT_FAILURE);
+	}
+	std::auto_ptr<sql::Statement> stmnt(conn->createStatement());
+	sql::ResultSet *res = stmnt->executeQuery("SELECT word FROM word_response WHERE exhibition = '" + exhibition + "'");
+	while (res->next())
+	{
+		word = res->getString("word");
+		wordList.push_back(word); 
 		
-// 	}
-// 	return wordList;
-// }
+	}
+	return wordList;
+}
 	
 // Get all exhibitions function
 map<string, string> galleryDB::getAllExhibitions(vector<string> &exhibitionList, vector<string> &exhibitionLink) {
