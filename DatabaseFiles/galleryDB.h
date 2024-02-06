@@ -28,8 +28,8 @@ public:
     galleryDB();
     //add user's word entry to word table in database 
     void addEntryWord(string exhibition, string word); 
-    //take all words within the database word table entered the day of the given timestamp 
-        //vector<string> sumWord(string timestamp); 
+    //get all words within the database word table for a certain exhibition 
+    vector<string> getWords(string exhibition); 
     //add user's emotion entry to emotion table in database
         //void addEmotion(string art_piece, string emotion);
     // function to get all exhibition names
