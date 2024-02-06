@@ -32,7 +32,7 @@ galleryDB::galleryDB() {
    	
 }
 
-void galleryDB::addEntryWord(string word){
+void galleryDB::addEntryWord(string exhibition, string word){
 
 	if (!conn) {
    		cerr << "Invalid database connection" << endl;
@@ -41,45 +41,45 @@ void galleryDB::addEntryWord(string word){
 
   	std::auto_ptr<sql::Statement> stmnt(conn->createStatement());
 
-  	stmnt->executeQuery("INSERT INTO word_response(word) VALUES ('"+word+"')");
+  	stmnt->executeQuery("INSERT INTO word_response(exhibition, word) VALUES ('"+exhibition+"','"+word+"')");
 }
 
 
-void galleryDB::addEmotion(string art_piece, string emotion){
+// void galleryDB::addEmotion(string art_piece, string emotion){
 
-	if (!conn) {
-   		cerr << "Invalid database connection" << endl;
-   		exit (EXIT_FAILURE);
-  	}
+// 	if (!conn) {
+//    		cerr << "Invalid database connection" << endl;
+//    		exit (EXIT_FAILURE);
+//   	}
 
-  	std::auto_ptr<sql::Statement> stmnt(conn->createStatement());
+//   	std::auto_ptr<sql::Statement> stmnt(conn->createStatement());
 
-  	stmnt->executeQuery("INSERT INTO emotion_response(art_piece, emotion) VALUES ('"+art_piece+"','"+emotion+"')");
-}
+//   	stmnt->executeQuery("INSERT INTO emotion_response(art_piece, emotion) VALUES ('"+art_piece+"','"+emotion+"')");
+// }
 
 
-vector<string> galleryDB::sumWord(string timestamp){
-	timestamp.append("%");
-	string word;
-	vector<string> wordList; 
-	if (!conn)
-	{
-		cerr << "Invalid database connection" << endl;
-		exit(EXIT_FAILURE);
-	}
-	std::auto_ptr<sql::Statement> stmnt(conn->createStatement());
-	sql::ResultSet *res = stmnt->executeQuery("SELECT word FROM word_response WHERE timestamp like '" + timestamp + "'");
-	while (res->next())
-	{
-		word = res->getString("word");
-		wordList.push_back(word); 
+// vector<string> galleryDB::sumWord(string timestamp){
+// 	timestamp.append("%");
+// 	string word;
+// 	vector<string> wordList; 
+// 	if (!conn)
+// 	{
+// 		cerr << "Invalid database connection" << endl;
+// 		exit(EXIT_FAILURE);
+// 	}
+// 	std::auto_ptr<sql::Statement> stmnt(conn->createStatement());
+// 	sql::ResultSet *res = stmnt->executeQuery("SELECT word FROM word_response WHERE timestamp like '" + timestamp + "'");
+// 	while (res->next())
+// 	{
+// 		word = res->getString("word");
+// 		wordList.push_back(word); 
 		
-	}
-	return wordList;
-}
+// 	}
+// 	return wordList;
+// }
 	
-// Get all arts function
-map<string, string> galleryDB::getAllArts(vector<string> &artList, vector<string> &artLink) {
+// Get all exhibitions function
+map<string, string> galleryDB::getAllExhibitions(vector<string> &exhibitionList, vector<string> &exhibitionLink) {
 	map<string, string> list;
 	if (!conn) {
 		cerr << "Invalid database connection" << endl;
@@ -88,18 +88,18 @@ map<string, string> galleryDB::getAllArts(vector<string> &artList, vector<string
 	std::unique_ptr<sql::Statement> stmnt(conn->createStatement());
 	
   	sql::ResultSet *res = stmnt->executeQuery(
-			"SELECT DISTINCT Name, Link FROM art_pieces"
+			"SELECT DISTINCT Name, Link FROM exhibitions"
 	);
     
     // Loop through and print results
     while (res->next()) {
-    	string art;
+    	string exhibition;
     	art = res->getString("Name");
     	string link;
     	link = res->getString("Link");
 	    list[art] = link;
-	    artList.push_back(art);
-	    artLink.push_back(link);
+	    exhibitionList.push_back(exhibition);
+	    exhibitionLink.push_back(link);
     }
     
     return list;
@@ -118,7 +118,7 @@ vector<exhibitionEntry> galleryDB::find(string search) {
 	std::unique_ptr<sql::Statement> stmnt(conn->createStatement());
     // Execute query
     sql::ResultSet *res = stmnt->executeQuery(
-			"SELECT * FROM art_pieces WHERE Name like '%"+search+"%'");
+			"SELECT * FROM exhibitions WHERE Name like '%"+search+"%'");
     
     // Loop through and print results
 	while (res->next()) {
@@ -141,7 +141,7 @@ void galleryDB::addEntry(string name, string link){
   	std::auto_ptr<sql::Statement> stmnt(conn->createStatement());
 
   	
-  	stmnt->executeQuery("INSERT INTO art_pieces(Name,Link) VALUES ('"+name+"','"+link+"')");
+  	stmnt->executeQuery("INSERT INTO exhibitions(Name,Link) VALUES ('"+name+"','"+link+"')");
 }
 
 exhibitionEntry galleryDB::fetchArt(string id){
@@ -156,7 +156,7 @@ exhibitionEntry galleryDB::fetchArt(string id){
   	std::auto_ptr<sql::Statement> stmnt(conn->createStatement());
 
   	
-    sql::ResultSet *res = stmnt->executeQuery("SELECT * FROM art_pieces WHERE ID = '"+id+"'");
+    sql::ResultSet *res = stmnt->executeQuery("SELECT * FROM exhibitions WHERE ID = '"+id+"'");
     
     // Get first entry
     if (res->next()) {
@@ -174,7 +174,7 @@ void galleryDB::editEntry(string idnum,string name,string link){
   	}
 
   	std::auto_ptr<sql::Statement> stmnt(conn->createStatement());
-  	stmnt->executeQuery("UPDATE art_pieces SET Name = '"+name+"', Link ='"+link+"' WHERE ID='"+idnum+"'");
+  	stmnt->executeQuery("UPDATE exhibitions SET Name = '"+name+"', Link ='"+link+"' WHERE ID='"+idnum+"'");
 }
 
 
@@ -189,33 +189,33 @@ void galleryDB::deleteEntry(string idnum){
 
   std::auto_ptr<sql::Statement> stmt(conn->createStatement());
 
-  stmt->execute("DELETE FROM art_pieces WHERE ID='"+idnum+"'");
+  stmt->execute("DELETE FROM exhibitions WHERE ID='"+idnum+"'");
 }
 
 
 // function to summarize results of emotion responses for each art piece
-void galleryDB::summaryEmotion(vector<string> &emotionVec, vector<string> &artVec, vector<string> &countVec) {	
-	if (!conn) {
-		cerr << "Invalid database connection" << endl;
-		exit(EXIT_FAILURE);
-	}
-	std::unique_ptr<sql::Statement> stmnt(conn->createStatement());
+// void galleryDB::summaryEmotion(vector<string> &emotionVec, vector<string> &artVec, vector<string> &countVec) {	
+// 	if (!conn) {
+// 		cerr << "Invalid database connection" << endl;
+// 		exit(EXIT_FAILURE);
+// 	}
+// 	std::unique_ptr<sql::Statement> stmnt(conn->createStatement());
 	
-  	sql::ResultSet *res = stmnt->executeQuery(
-			"SELECT emotion, art_piece, COUNT(emotion) as count_emotion FROM emotion_response GROUP BY emotion, art_piece"
-	);
+//   	sql::ResultSet *res = stmnt->executeQuery(
+// 			"SELECT emotion, art_piece, COUNT(emotion) as count_emotion FROM emotion_response GROUP BY emotion, art_piece"
+// 	);
     
-    // Loop through and print results
-    while (res->next()) {
-    	string emotion;
-	    emotion = res->getString("emotion");
-        emotionVec.push_back(emotion);
-    	string art;
-    	art = res->getString("art_piece");
-    	artVec.push_back(art);
-    	string countStr;
-    	countStr = res->getString("count_emotion");
-    	countVec.push_back(countStr);
-    	//cout << art << " " << emotion << " " << countInt << endl;
-    }
-}
+//     // Loop through and print results
+//     while (res->next()) {
+//     	string emotion;
+// 	    emotion = res->getString("emotion");
+//         emotionVec.push_back(emotion);
+//     	string art;
+//     	art = res->getString("art_piece");
+//     	artVec.push_back(art);
+//     	string countStr;
+//     	countStr = res->getString("count_emotion");
+//     	countVec.push_back(countStr);
+//     	//cout << art << " " << emotion << " " << countInt << endl;
+//     }
+// }
