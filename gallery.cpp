@@ -36,7 +36,7 @@ string getWordJSON(vector<string> &wordList){
    }
 }
 
- string jsonResults(vector<artEntry> pbList) {
+ string jsonResults(vector<exhibitionEntry> pbList) {
 	string res = "{\"results\":[";
 	for (int i = 0; i<pbList.size(); i++) {
 		res += pbList[i].json();
@@ -76,48 +76,48 @@ int main(void) {
   Server svr;
   // Object of GalleryDB
   galleryDB gldb;
-  vector<artEntry> results;
+  vector<exhibitionEntry> results;
   /* "/" just returnsAPI name */
   svr.Get("/", [](const Request & /*req*/, Response &res) {
     res.set_header("Access-Control-Allow-Origin","*");
     res.set_content("Gallery API", "text/plain"); 
   });
   
-  // Get all art pieces names
-  svr.Get(R"(/response/getAllArts)", [&](const Request& req, Response& res){
+  // Get all exhibition pieces names
+  svr.Get(R"(/response/getAllExhibitions)", [&](const Request& req, Response& res){
   	res.set_header("Access-Control-Allow-Origin","*");
-  	vector<string> artList;
-  	vector<string> artLink;
-  	map<string, string> allArts = gldb.getAllArts(artList, artLink);
+  	vector<string> exhibitionList;
+  	vector<string> exhibitionLink;
+  	map<string, string> allExhibitions = gldb.getAllExhibitions(exhibitionList, exhibitionLink);
   	
   	string result;
-  	if (allArts.size() == 0){
+  	if (allExhibitions.size() == 0){
   		result = "{\"status\": \"failed\"}";
   	}
   	
   	else {
-  		result = "{\"status\": \"success\", \"arts\":[";
+  		result = "{\"status\": \"success\", \"exhibitions\":[";
   		bool first = true;
-  		for (auto it : allArts) {
+  		for (auto it : allExhibitions) {
   			if (not first) result += ",";
-  			string art = it.first;
+  			string exhibition = it.first;
   			string link = it.second;
-			string json = "{\""+art+"\":\""+link+"\"}";
+			string json = "{\""+exhibition+"\":\""+link+"\"}";
 			result += json;
 			first = false;
   		}
-  		result += "], \"arts\":[";
+  		result += "], \"exhibitions\":[";
   		
   		first = true;
-  		for (auto art : artList){
+  		for (auto exhibition : exhibitionList){
   			if (not first) result += ",";
-  			result += "\""+ art + "\"";
+  			result += "\""+ exhibition + "\"";
   			first = false;
   		}
   		result += "], \"links\":[";
   		
   		first = true;
-  		for (auto link : artLink){
+  		for (auto link : exhibitionLink){
   			if (not first) result += ",";
   			result += "\""+ link + "\"";
   			first = false;
@@ -129,27 +129,28 @@ int main(void) {
     res.status = 200;
   });
   
-  svr.Get(R"(/response/addEmotion/(.*)/(.*))", [&](const Request& req, Response& res) {
-    res.set_header("Access-Control-Allow-Origin","*");
-    string art_piece = req.matches[1];
-    string emotion = req.matches[2];
-    string result;
-    
-    gldb.addEmotion(art_piece, emotion);
-    result = "{\"status\":\"success\",\"art_piece\":\"" + art_piece + "\",\"emotion\":\"" + emotion + "\"}";
-    
-    res.set_content(result, "text/json");
-    res.status = 200;
-  });
+	  // svr.Get(R"(/response/addEmotion/(.*)/(.*))", [&](const Request& req, Response& res) {
+	  //   res.set_header("Access-Control-Allow-Origin","*");
+	  //   string exhibition = req.matches[1];
+	  //   string emotion = req.matches[2];
+	  //   string result;
+	    
+	  //   gldb.addEmotion(art_piece, emotion);
+	  //   result = "{\"status\":\"success\",\"art_piece\":\"" + art_piece + "\",\"emotion\":\"" + emotion + "\"}";
+	    
+	  //   res.set_content(result, "text/json");
+	  //   res.status = 200;
+	  // });
 
   
-  svr.Get(R"(/response/word/(.*))", [&](const Request& req, Response& res) {
+  svr.Get(R"(/response/word/(.*)/(.*))", [&](const Request& req, Response& res) {
     res.set_header("Access-Control-Allow-Origin","*");
-    string word = req.matches[1];
+    string exhibition = req.matches[1];
+    string word = req.matches[2];
     string result;
     
-    gldb.addEntryWord(word);
-    result = "{\"status\":\"success\",\"word\":\"" + word + "\"}";
+    gldb.addEntryWord(exhibition, word);
+	result = "{\"status\":\"success\",\"exhibition\":\"" + exhibition + "\",\"word\":\"" + word + "\"}";
     
     res.set_content(result, "text/json");
     res.status = 200;
@@ -158,8 +159,8 @@ int main(void) {
   svr.Get(R"(/retrieve/words/(.*))", [&](const httplib::Request& req, httplib::Response& res) {
     res.set_header("Access-Control-Allow-Origin","*");
 
-    string timestamp = req.matches[1];
-    vector<string> wordResult = gldb.sumWord(timestamp); 
+    string exhibition = req.matches[1];
+    vector<string> wordResult = gldb.getWords(exhibition); 
     string json = getWordJSON(wordResult); 
 	  
     res.set_content(json, "text/json");
@@ -183,7 +184,7 @@ int main(void) {
     res.status = 200;
   });
 	
-	svr.Get(R"(/art/find)", [&](const httplib::Request& req, httplib::Response& res) {
+	svr.Get(R"(/exhibition/find)", [&](const httplib::Request& req, httplib::Response& res) {
     	res.set_header("Access-Control-Allow-Origin","*");
     	results = gldb.find("");
     	string json = jsonResults(results);
@@ -191,7 +192,7 @@ int main(void) {
     	res.status = 200;
   	});
 
-	svr.Get(R"(/art/find/(.*))", [&](const httplib::Request& req, httplib::Response& res) {
+	svr.Get(R"(/exhibition/find/(.*))", [&](const httplib::Request& req, httplib::Response& res) {
     	res.set_header("Access-Control-Allow-Origin","*");
 
     	string name = req.matches[1];
@@ -202,7 +203,7 @@ int main(void) {
   	});
 
 
-svr.Get(R"(/art/add/(.*)/(.*))", [&](const httplib::Request& req, httplib::Response& res) {
+svr.Get(R"(/exhibition/add/(.*)/(.*))", [&](const httplib::Request& req, httplib::Response& res) {
 	res.set_header("Access-Control-Allow-Origin","*");
 
 	string name = req.matches[1];
@@ -214,7 +215,7 @@ svr.Get(R"(/art/add/(.*)/(.*))", [&](const httplib::Request& req, httplib::Respo
 	res.status = 200;
 }); 	
 
-svr.Get(R"(/art/update/(.*)/(.*)/(.*))", [&](const httplib::Request& req, httplib::Response& res) {
+svr.Get(R"(/exhibition/update/(.*)/(.*)/(.*))", [&](const httplib::Request& req, httplib::Response& res) {
 	res.set_header("Access-Control-Allow-Origin","*");
 
 	string ID = req.matches[1];
@@ -225,7 +226,7 @@ svr.Get(R"(/art/update/(.*)/(.*)/(.*))", [&](const httplib::Request& req, httpli
 	res.status = 200;
 }); 
 
-svr.Get(R"(/art/delete/(.*))", [&](const httplib::Request& req, httplib::Response& res) {
+svr.Get(R"(/exhibition/delete/(.*))", [&](const httplib::Request& req, httplib::Response& res) {
 	res.set_header("Access-Control-Allow-Origin","*");
 
 	string ID = req.matches[1];
@@ -235,43 +236,43 @@ svr.Get(R"(/art/delete/(.*))", [&](const httplib::Request& req, httplib::Respons
 });  
  
 // Summary Page for Emotions
-svr.Get(R"(/response/summaryEmotion)", [&](const Request& req, Response& res){
-  	res.set_header("Access-Control-Allow-Origin","*");
-  	vector<string> artVec;
-  	vector<string> emoVec;
-  	vector<string> countVec;
-  	
-  	gldb.summaryEmotion(emoVec, artVec, countVec);
-  	string result;
-  	
-  	if (artVec.size() > 0 && emoVec.size() > 0 && countVec.size() > 0){
-  		result = "{\"status\":\"success\", ";
-  		string emoStr = "\"emotions\":[";
-  		string artStr = "\"arts\":[";
-  		string countStr = "\"counts\":[";
-  		bool first = true;
-  		for (int i=0; i<artVec.size(); i++){
-  			if (not first) {
-  				artStr += ",";
-  				emoStr += ",";     
-  				countStr += ",";
-  			}
-  			artStr += "\"" + artVec[i] + "\"";
-  			emoStr += "\"" + emoVec[i] + "\"";
-  			countStr += countVec[i];
-  			first = false;
-  		}
-  		artStr += "]";
-  		emoStr += "]";
-  		countStr += "]";
-  		result += emoStr + "," + artStr + "," + countStr + "}";
-  	}
-  	else
-  		result = "{\"status\":\"failed\"}";
-  		
-  	res.set_content(result, "text/json");
-  	res.status = 200;
-  });
+	// svr.Get(R"(/response/summaryEmotion)", [&](const Request& req, Response& res){
+	//   	res.set_header("Access-Control-Allow-Origin","*");
+	//   	vector<string> exhibitionVec;
+	//   	vector<string> emoVec;
+	//   	vector<string> countVec;
+	  	
+	//   	gldb.summaryEmotion(emoVec, artVec, countVec);
+	//   	string result;
+	  	
+	//   	if (artVec.size() > 0 && emoVec.size() > 0 && countVec.size() > 0){
+	//   		result = "{\"status\":\"success\", ";
+	//   		string emoStr = "\"emotions\":[";
+	//   		string artStr = "\"arts\":[";
+	//   		string countStr = "\"counts\":[";
+	//   		bool first = true;
+	//   		for (int i=0; i<artVec.size(); i++){
+	//   			if (not first) {
+	//   				artStr += ",";
+	//   				emoStr += ",";     
+	//   				countStr += ",";
+	//   			}
+	//   			artStr += "\"" + artVec[i] + "\"";
+	//   			emoStr += "\"" + emoVec[i] + "\"";
+	//   			countStr += countVec[i];
+	//   			first = false;
+	//   		}
+	//   		artStr += "]";
+	//   		emoStr += "]";
+	//   		countStr += "]";
+	//   		result += emoStr + "," + artStr + "," + countStr + "}";
+	//   	}
+	//   	else
+	//   		result = "{\"status\":\"failed\"}";
+	  		
+	//   	res.set_content(result, "text/json");
+	//   	res.status = 200;
+	//   });
 
 
   
