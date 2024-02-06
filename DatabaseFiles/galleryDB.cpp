@@ -106,8 +106,8 @@ map<string, string> galleryDB::getAllArts(vector<string> &artList, vector<string
 }
 
 
-vector<artEntry> galleryDB::find(string search) {
-	vector<artEntry> list;
+vector<exhibitionEntry> galleryDB::find(string search) {
+	vector<exhibitionEntry> list;
     
     // Make sure the connection is still valid
     if (!conn) {
@@ -122,7 +122,7 @@ vector<artEntry> galleryDB::find(string search) {
     
     // Loop through and print results
 	while (res->next()) {
-    	artEntry entry(res->getString("ID"),res->getString("Name"),res->getString("Link"));
+    	exhibitionEntry entry(res->getString("ID"),res->getString("Name"),res->getString("Link"));
 	    list.push_back(entry);
 
     }
@@ -144,9 +144,9 @@ void galleryDB::addEntry(string name, string link){
   	stmnt->executeQuery("INSERT INTO art_pieces(Name,Link) VALUES ('"+name+"','"+link+"')");
 }
 
-artEntry galleryDB::fetchArt(string id){
+exhibitionEntry galleryDB::fetchArt(string id){
 
-	artEntry entry;	
+	exhibitionEntry entry;	
 	
 	if (!conn) {
    		cerr << "Invalid database connection" << endl;
@@ -160,7 +160,7 @@ artEntry galleryDB::fetchArt(string id){
     
     // Get first entry
     if (res->next()) {
-    	entry = artEntry(res->getString("ID"),res->getString("Name"), res->getString("Link"));
+    	entry = exhibitionEntry(res->getString("ID"),res->getString("Name"), res->getString("Link"));
     }
     return entry;
 }
