@@ -45,7 +45,7 @@ void galleryDB::addEntryWord(string exhibition, string word){
 }
 
 
-// void galleryDB::addEmotion(string art_piece, string emotion){
+// void galleryDB::addEmotion(string exhibition, string emotion){
 
 // 	if (!conn) {
 //    		cerr << "Invalid database connection" << endl;
@@ -54,7 +54,7 @@ void galleryDB::addEntryWord(string exhibition, string word){
 
 //   	std::auto_ptr<sql::Statement> stmnt(conn->createStatement());
 
-//   	stmnt->executeQuery("INSERT INTO emotion_response(art_piece, emotion) VALUES ('"+art_piece+"','"+emotion+"')");
+//   	stmnt->executeQuery("INSERT INTO emotion_response(exhibition, emotion) VALUES ('"+exhibition+"','"+emotion+"')");
 // }
 
 
@@ -94,10 +94,10 @@ map<string, string> galleryDB::getAllExhibitions(vector<string> &exhibitionList,
     // Loop through and print results
     while (res->next()) {
     	string exhibition;
-    	art = res->getString("Name");
+    	exhibition = res->getString("Name");
     	string link;
     	link = res->getString("Link");
-	    list[art] = link;
+	    list[exhibition] = link;
 	    exhibitionList.push_back(exhibition);
 	    exhibitionLink.push_back(link);
     }
@@ -144,7 +144,7 @@ void galleryDB::addEntry(string name, string link){
   	stmnt->executeQuery("INSERT INTO exhibitions(Name,Link) VALUES ('"+name+"','"+link+"')");
 }
 
-exhibitionEntry galleryDB::fetchArt(string id){
+exhibitionEntry galleryDB::fetchexhibition(string id){
 
 	exhibitionEntry entry;	
 	
@@ -193,8 +193,8 @@ void galleryDB::deleteEntry(string idnum){
 }
 
 
-// function to summarize results of emotion responses for each art piece
-// void galleryDB::summaryEmotion(vector<string> &emotionVec, vector<string> &artVec, vector<string> &countVec) {	
+// function to summarize results of emotion responses for each exhibition piece
+// void galleryDB::summaryEmotion(vector<string> &emotionVec, vector<string> &exhibitionVec, vector<string> &countVec) {	
 // 	if (!conn) {
 // 		cerr << "Invalid database connection" << endl;
 // 		exit(EXIT_FAILURE);
@@ -202,7 +202,7 @@ void galleryDB::deleteEntry(string idnum){
 // 	std::unique_ptr<sql::Statement> stmnt(conn->createStatement());
 	
 //   	sql::ResultSet *res = stmnt->executeQuery(
-// 			"SELECT emotion, art_piece, COUNT(emotion) as count_emotion FROM emotion_response GROUP BY emotion, art_piece"
+// 			"SELECT emotion, exhibition, COUNT(emotion) as count_emotion FROM emotion_response GROUP BY emotion, exhibition"
 // 	);
     
 //     // Loop through and print results
@@ -210,12 +210,12 @@ void galleryDB::deleteEntry(string idnum){
 //     	string emotion;
 // 	    emotion = res->getString("emotion");
 //         emotionVec.push_back(emotion);
-//     	string art;
-//     	art = res->getString("art_piece");
-//     	artVec.push_back(art);
+//     	string exhibition;
+//     	exhibition = res->getString("exhibition");
+//     	exhibitionVec.push_back(exhibition);
 //     	string countStr;
 //     	countStr = res->getString("count_emotion");
 //     	countVec.push_back(countStr);
-//     	//cout << art << " " << emotion << " " << countInt << endl;
+//     	//cout << exhibition << " " << emotion << " " << countInt << endl;
 //     }
 // }
