@@ -1,5 +1,5 @@
 window.onload = function(argument) {
-	var baseUrl = 'http://18.222.189.198:5005';
+	var baseUrl = 'http://138.28.162.217:5005';
 	var wordsRetrieved = "";
 	var words = {};
 	var words_attr = [];
