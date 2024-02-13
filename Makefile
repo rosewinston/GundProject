@@ -40,10 +40,10 @@ PutHTML:
 	cp -R gund_img /var/www/html/gallery/
 	cp AdminPortal/AdminPortal.html /var/www/html/gallery/
 	cp AdminPortal/adminPortal.js /var/www/html/gallery/
+	cp words.html /var/www/html/gallery/
 	cp words1.html /var/www/html/gallery/
 	cp words2.html /var/www/html/gallery/
 	cp words3.html /var/www/html/gallery/
-	cp words4.html /var/www/html/gallery/
 	cp words.css /var/www/html/gallery/
 	cp words.js /var/www/html/gallery/
 
