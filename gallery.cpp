@@ -5,7 +5,6 @@
 #include <algorithm>
 #include "httplib.h"
 #include "DatabaseFiles/galleryDB.h"
-#include "DatabaseFiles/emotionEntry.h"
 #include <string>
 
 using namespace httplib;

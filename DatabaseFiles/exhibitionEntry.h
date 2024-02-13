@@ -2,8 +2,8 @@
 #include <string>
 using namespace std;
 
-#ifndef exhibitionEntry_H
-#define exhibitionEntry
+#ifndef EXHIBITIONENTRY_H
+#define EXHIBITIONENTRY
 
 class exhibitionEntry {
 public:
