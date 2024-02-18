@@ -16,6 +16,7 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
         <link href="css/GalleryFeedback.css"type="text/css" rel="stylesheet" />
+        <link href="css/ColorResponse.css"type="text/css" rel="stylesheet" />
     </head>
 
 
@@ -24,70 +25,26 @@
             <img src= "gund_img/gund3.jpeg">
         </div>
         <div class = "content-section">
-            <h1>Your feedback is valuable to us!</h1>
+            <!-- <h1>Your feedback is valuable to us!</h1> -->
+            
             <div class="word-box" style="padding-top:3rem">
-                <label for="usr">Share a word that encapsulates how the exhibition made you feel!</label>
+                <div class="selector-container" style="padding-top:3rem"> <!-- selector section begin-->
+                    <div class="select">
+                        <select name="slct" id="slct">
+                            <option>exhibition1test</option>
+                            <option>exhibition2test</option>
+                        </select>
+                    </div>
+                </div> <!-- Selector section end-->
+                <label for="usr">Share a word that encapsulates how [exhibition] made you feel!</label>
                 <input type="text" class="form-control" id="word-response">
                 <button class="btn btn-primary" id="submit-btn">Submit Response!</button>
             </div>
-
-            <!--
-            <div class="word-box dropdown text-center" data-dropdown>
-                <p>How do you feel about the exhibition overall?</p>
-                <button class="link" data-dropdown-button>Choose an emoji here!</button>
-                <div class="dropdown-menu dropdown-menu-center information-grid">
-                    <div>
-                        <div class="dropdown-emojis">
-                            <option href="#" class="link">&#128512;</option>
-                            <option href="#" class="link">&#128514;</option>
-                            <option href="#" class="link">&#128523;</option>
-                            <option href="#" class="link">&#128523;</option>
-                            <option href="#" class="link">&#128523;</option>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="dropdown-emojis">
-                            <option href="#" class="link">&#128523;</option>
-                            <option href="#" class="link">&#128523;</option>
-                            <option href="#" class="link">&#128523;</option>
-                            <option href="#" class="link">&#128523;</option>
-                            <option href="#" class="link">&#128523;</option>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="dropdown-emojis">
-                            <option href="#" class="link">&#128523;</option>
-                            <option href="#" class="link">&#128523;</option>
-                            <option href="#" class="link">&#128523;</option>
-                            <option href="#" class="link">&#128523;</option>
-                            <option href="#" class="link">&#128523;</option>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="dropdown-emojis">
-                            <option href="#" class="link">&#128523;</option>
-                            <option href="#" class="link">&#128523;</option>
-                            <option href="#" class="link">&#128523;</option>
-                            <option href="#" class="link">&#128523;</option>
-                            <option href="#" class="link">&#128523;</option>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="dropdown-emojis">
-                            <option href="#" class="link">&#128512;</option>
-                            <option href="#" class="link">&#128514;</option>
-                            <option href="#" class="link">&#128523;</option>
-                            <option href="#" class="link">&#128523;</option>
-                            <option href="#" class="link">&#128523;</option>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
+            <img id="slide-1" src="gund_img/gund1.jpeg" alt="img" draggable="false" style="width:100%;max-width:30%;max-height:300px">>
+             <div>   
                 <a href="SummaryPage.html" class="previous">Previous</a>
-                <a href="words.html" class="next">Next</a>
-
-            </div>
+                <a href="words.html" class="next">Next</a>  
+            </div>          
     </body>
 
     <!-- Bootstrap core JS-->

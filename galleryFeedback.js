@@ -12,10 +12,12 @@ var word = "";
 
 	// document.getElementById('submit-btn').addEventListener("click", getWord); unsure if used for new code
 
+getAllExhibitions();
+
 function siteDropdown(exhibitionList, exhibitionLink) { 
 	var dropdown = "";
 	var countValue = 0;
-	artList.forEach(function(key){
+	exhibitionList.forEach(function(key){
 		dropdown += "<option value='"+exhibitionLink[countValue]+"'>"+key+"</option>";
 		countValue += 1;
 	})
