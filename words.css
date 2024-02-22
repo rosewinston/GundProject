@@ -1,3 +1,20 @@
+@font-face {
+  font-family: "Gund Gallery";
+  src: url('Gund-sans/GundSans-Regular.otf') format("opentype");
+}
+
+@font-face {
+  font-family: "Gund Gallery";
+  font-weight: bold;
+  src: url("Gund-sans/GundSans-Bold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Gund Gallery";
+  font-style: italic;
+  src: url(Gund-sans/GundSans-RegularItalic.otf) format("opentype");
+}
+
 header {
   background-color: #5e5d5d;
   padding: 10px;
@@ -7,7 +24,40 @@ header {
   font-size: 25px;
   color: white;
 }
+
+
 body{
   background:#141414;
   overflow:hidden;
+}
+
+a {
+  text-decoration: none;
+  display: inline-flex;
+  padding: 5px 16px;
+}
+
+a:hover {
+  background-color: #283618;
+  color:#fff;
+}
+
+.previous {
+  background-color: #f1f1f1;
+  color: #283618;
+  position: absolute;
+  top: 13px;
+  left: 100px;
+  border-radius: 10px;
+  opacity: 75%;
+}
+
+.next {
+  background-color: #606c38;
+  color: white;
+  position: absolute;
+  top: 13px;
+  right: 100px;
+  border-radius: 10px;
+  opacity: 75%;
 }
