@@ -59,7 +59,6 @@ void galleryDB::addEntryWord(string exhibition, string word){
 
 
 vector<string> galleryDB::getWords(string exhibition){
-	timestamp.append("%");
 	string word;
 	vector<string> wordList; 
 	if (!conn)
@@ -144,26 +143,26 @@ void galleryDB::addEntry(string name, string link){
   	stmnt->executeQuery("INSERT INTO exhibitions(Name,Link) VALUES ('"+name+"','"+link+"')");
 }
 
-exhibitionEntry galleryDB::fetchexhibition(string id){
+// exhibitionEntry galleryDB::fetchexhibition(string id){
 
-	exhibitionEntry entry;	
+// 	exhibitionEntry entry;	
 	
-	if (!conn) {
-   		cerr << "Invalid database connection" << endl;
-   		exit (EXIT_FAILURE);
-  	}
+// 	if (!conn) {
+//    		cerr << "Invalid database connection" << endl;
+//    		exit (EXIT_FAILURE);
+//   	}
 
-  	std::auto_ptr<sql::Statement> stmnt(conn->createStatement());
+//   	std::auto_ptr<sql::Statement> stmnt(conn->createStatement());
 
   	
-    sql::ResultSet *res = stmnt->executeQuery("SELECT * FROM exhibitions WHERE ID = '"+id+"'");
+//     sql::ResultSet *res = stmnt->executeQuery("SELECT * FROM exhibitions WHERE ID = '"+id+"'");
     
-    // Get first entry
-    if (res->next()) {
-    	entry = exhibitionEntry(res->getString("ID"),res->getString("Name"), res->getString("Link"));
-    }
-    return entry;
-}
+//     // Get first entry
+//     if (res->next()) {
+//     	entry = exhibitionEntry(res->getString("ID"),res->getString("Name"), res->getString("Link"));
+//     }
+//     return entry;
+// }
 
 void galleryDB::editEntry(string idnum,string name,string link){
 	std::unique_ptr<sql::Connection>  conn(driver->connect(db_url, properties));

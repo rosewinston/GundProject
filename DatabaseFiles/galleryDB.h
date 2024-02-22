@@ -17,8 +17,8 @@
 #define GALLERYDB_H
 
 #define DB_URL "jdbc:mariadb://localhost:3306/gallery"
-#define USER "root"
-#define PASS "0606"
+#define USER "winston1"
+#define PASS "Rose2024"
 
 using namespace std;
 

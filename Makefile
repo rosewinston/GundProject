@@ -22,10 +22,10 @@ gallery.o: gallery.cpp httplib.h
 	$(CC) -c $(CFLAGS) gallery.cpp
 	
 exhibitionEntry.o: DatabaseFiles/exhibitionEntry.cpp DatabaseFiles/exhibitionEntry.h
-	$(CC) -c $(CFLAGS) DatabaseFiles/artEntry.cpp
+	$(CC) -c $(CFLAGS) DatabaseFiles/exhibitionEntry.cpp
 
-gallery: gallery.o galleryDB.o wordEntry.o artEntry.o
-	$(CC) gallery.o galleryDB.o wordEntry.o artEntry.o -o gallery -L/usr/local/lib -lmariadbcpp
+gallery: gallery.o galleryDB.o wordEntry.o exhibitionEntry.o
+	$(CC) gallery.o galleryDB.o wordEntry.o exhibitionEntry.o -o gallery -L/usr/local/lib -lmariadbcpp
 	
 
 
