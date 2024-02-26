@@ -1,6 +1,6 @@
 //Admin Portal for Gund Gallery exhibitionDB
 var exhibitionList = [];
-const baseUrl = '138.28.162.217:5005';
+const baseUrl = window.location.origin + ":5005";
 const imageUrl = "https://collection.thegund.org/Media/images/"
 
 /* Set up events */
@@ -51,7 +51,8 @@ function findMatches(search) {
     if (search != "") search = "/" + search;
 
 	console.log("Search:" + search);
-    fetch(baseUrl + '/exhibition/find' + search, {
+    var completeURL= baseUrl + '/exhibition/find' + search;
+    fetch(completeURL, {
             method: 'get'
         })
         .then(response => response.json())
