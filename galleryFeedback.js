@@ -1,13 +1,14 @@
-var baseUrl = 'http://138.28.162.217:5005';
+const baseUrl = window.location.origin + ":5005";
+const gundUrl = "https://collection.thegund.org/Media/images/";
 var state="off";
 var myname="";
-var art_piece="";
+var exhibition="";
 var mytoken = "";
 var inthandle;
 var inthandle2;
 var color = '#343a40';
-var username = "";
-var password = "";
+var exhibitionList = [];
+var exhibitionLink = [];
 var word = ""; 
 
 	// document.getElementById('submit-btn').addEventListener("click", getWord); unsure if used for new code
@@ -24,7 +25,7 @@ function siteDropdown(exhibitionList, exhibitionLink) {
 	
 	var imageList = "";
 	var count2 = 0;
-	artLink.forEach(function(key){
+	exhibitionLink.forEach(function(key){
 		imageList += "<img id='"+key+"' src='"+gundUrl+key+"' alt='img' draggable='false'>";
 	})
 
@@ -33,6 +34,15 @@ function siteDropdown(exhibitionList, exhibitionLink) {
 	return;
 }
 
+function completeGetExhibitions(results){
+	if (results["status"] != "success") {
+		// document.querySelector('#output').innerHTML = ErrQuery+": get sites";
+		return;
+	}
+	exhibitionList = results['exhibitions'];
+	exhibitionLink = results['links'];
+	siteDropdown(exhibitionList, exhibitionLink);
+}
 
 function getAllExhibitions(){
 	fetch(baseUrl+'/response/getAllExhibitions', {
@@ -43,16 +53,6 @@ function getAllExhibitions(){
     .catch(error => {
         {alert("Error: Something went wrong:"+error);}
     })
-}
-
-function completeGetExhibitions(results){
-	if (results["status"] != "success") {
-		// document.querySelector('#output').innerHTML = ErrQuery+": get sites";
-		return;
-	}
-	exhibitionList = results['exhibition'];
-	exhibitionLink = results['links'];
-	siteDropdown(exhibitionList, exhibitionLink);
 }
 
 // apply the event listener to all images
