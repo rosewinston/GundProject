@@ -117,3 +117,23 @@ function completeAddWord(results){
 function clearTextbox() {
     document.getElementById('word-response').value = "";
 }
+
+// Function and listener for selecting exhibition
+function selectExhibition(){
+	var e = document.getElementById("slct");
+	var exhibitionName = e.options[e.selectedIndex].text;
+	var label = "Share a word that encapsulates how "+exhibitionName+" made you feel!"
+	document.querySelector('label').innerHTML = label;
+}
+
+document.getElementById("slct").addEventListener("click",selectExhibition);
+
+// Code that changes the image on the slider when dropdown option is selected
+var dropdownList = document.getElementById('slct');
+
+
+dropdownList.addEventListener('change', event => {
+	currentLink = dropdownList.options[dropdownList.selectedIndex].value;
+	console.log(currentLink);
+	document.querySelector('.slider').innerHTML = "<img id='"+currentLink+"' src='"+gundUrl+currentLink+"' alt='img' draggable='false'>";
+});
