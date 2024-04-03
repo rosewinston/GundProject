@@ -78,7 +78,7 @@ vector<string> galleryDB::getWords(string exhibition){
 }
 	
 // Get all exhibitions function
-map<string, string> galleryDB::getAllExhibitions(vector<string> &exhibitionList, vector<string> &exhibitionLink, vector<bool> &exhibitionLinkBool) {
+map<string, string> galleryDB::getAllExhibitions(vector<string> &exhibitionList, vector<string> &exhibitionLink, vector<string> &exhibitionisLink) {
 	map<string, string> list;
 	if (!conn) {
 		cerr << "Invalid database connection" << endl;
@@ -87,7 +87,7 @@ map<string, string> galleryDB::getAllExhibitions(vector<string> &exhibitionList,
 	std::unique_ptr<sql::Statement> stmnt(conn->createStatement());
 	
   	sql::ResultSet *res = stmnt->executeQuery(
-			"SELECT DISTINCT Name, Link, LinkBool FROM exhibitions"
+			"SELECT DISTINCT Name, Link, isLink FROM exhibitions"
 	);
     
     // Loop through and print results
