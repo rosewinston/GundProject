@@ -31,15 +31,15 @@ public:
     //get all words within the database word table for a certain exhibition 
     vector<string> getWords(string exhibition); 
     // function to get all exhibition names
-    map<string, string> getAllExhibitions(vector<string> &exhibitionList, vector<string> &exhibitionLink, vector<bool> &exhibitionLinkBool);
+    map<string, string> getAllExhibitions(vector<string> &exhibitionList, vector<string> &exhibitionLink, vector<string> &exhibitionisLink);
     //find exhibition matching string
     vector<exhibitionEntry> find(string search);
     //get exhibition that matches with the ID given
     exhibitionEntry fetchExhibition(string id);
     // add exhibition to DB
-    void addEntry(string name, string link, bool linkBool);
+    void addEntry(string name, string link, string isLink);
     //edit exhibition name in DB
-    void editEntry(string idnum,string name,string link, bool linkBool);
+    void editEntry(string idnum,string name,string link, string isLink);
     //delete exhibition in DB
     void deleteEntry(string idnum);
    
