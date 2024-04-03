@@ -94,7 +94,7 @@ map<string, string> galleryDB::getAllExhibitions(vector<string> &exhibitionList,
     while (res->next()) {
     	string exhibition;
     	exhibition = res->getString("Name");
-    	string link;
+    	string link;	
     	link = res->getString("Link");
 	    list[exhibition] = link;
 	    exhibitionList.push_back(exhibition);
@@ -121,7 +121,7 @@ vector<exhibitionEntry> galleryDB::find(string search) {
     
     // Loop through and print results
 	while (res->next()) {
-    	exhibitionEntry entry(res->getString("ID"),res->getString("Name"),res->getString("Link"));
+    	exhibitionEntry entry(res->getString("ID"),res->getString("Name"),res->getString("Link"),res->getString("isLink");
 	    list.push_back(entry);
 
     }
