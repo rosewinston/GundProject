@@ -99,6 +99,9 @@ map<string, string> galleryDB::getAllExhibitions(vector<string> &exhibitionList,
 	    list[exhibition] = link;
 	    exhibitionList.push_back(exhibition);
 	    exhibitionLink.push_back(link);
+		string isLink;
+		isLink = res->getString("isLink");
+		exhibitionisLink.push_back(link);
     }
     
     return list;
@@ -121,7 +124,7 @@ vector<exhibitionEntry> galleryDB::find(string search) {
     
     // Loop through and print results
 	while (res->next()) {
-    	exhibitionEntry entry(res->getString("ID"),res->getString("Name"),res->getString("Link"),res->getString("isLink");
+    	exhibitionEntry entry(res->getString("ID"),res->getString("Name"),res->getString("Link"),res->getString("isLink"));
 	    list.push_back(entry);
 
     }
@@ -130,7 +133,7 @@ vector<exhibitionEntry> galleryDB::find(string search) {
 }
 
 
-void galleryDB::addEntry(string name, string link){
+void galleryDB::addEntry(string name, string link, string isLink){
 
 	if (!conn) {
    		cerr << "Invalid database connection" << endl;
@@ -140,7 +143,7 @@ void galleryDB::addEntry(string name, string link){
   	std::auto_ptr<sql::Statement> stmnt(conn->createStatement());
 
   	
-  	stmnt->executeQuery("INSERT INTO exhibitions(Name,Link) VALUES ('"+name+"','"+link+"')");
+  	stmnt->executeQuery("INSERT INTO exhibitions(Name,Link,isLink) VALUES ('"+name+"','"+link+",'"+isLink+"')");
 }
 
 // exhibitionEntry galleryDB::fetchexhibition(string id){
@@ -164,7 +167,7 @@ void galleryDB::addEntry(string name, string link){
 //     return entry;
 // }
 
-void galleryDB::editEntry(string idnum,string name,string link){
+void galleryDB::editEntry(string idnum,string name,string link, string isLink){
 	std::unique_ptr<sql::Connection>  conn(driver->connect(db_url, properties));
 	
 	if (!conn) {
@@ -173,7 +176,7 @@ void galleryDB::editEntry(string idnum,string name,string link){
   	}
 
   	std::auto_ptr<sql::Statement> stmnt(conn->createStatement());
-  	stmnt->executeQuery("UPDATE exhibitions SET Name = '"+name+"', Link ='"+link+"' WHERE ID='"+idnum+"'");
+  	stmnt->executeQuery("UPDATE exhibitions SET Name = '"+name+"','"+link+",'"+isLink+"' WHERE ID='"+idnum+"'");
 }
 
 

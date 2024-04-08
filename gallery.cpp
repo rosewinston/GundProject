@@ -25,7 +25,7 @@ string getWordJSON(vector<string> &wordList){
 		//string words = "\"words\":[";
 		
 		for (string word : wordList){
-			cout<<word<<endl; 
+			std::cout<<word<<endl; 
 			if (not first) result += ",";
 			result += "\"" + word + "\"";
 			first = false;
@@ -86,15 +86,17 @@ int main(void) {
   svr.Get(R"(/response/getAllExhibitions)", [&](const Request& req, Response& res){
   	res.set_header("Access-Control-Allow-Origin","*");
   	vector<string> exhibitionList;
-  	vector<string> exhibitionLink;
-  	map<string, string> allExhibitions = gldb.getAllExhibitions(exhibitionList, exhibitionLink);
-  	
+  	vector<string> exhibitionInfo;
+  	map<string, string> allExhibitions = gldb.getAllExhibitions(exhibitionList, exhibitionInfo);
   	string result;
+	std::cout << "begin Get" << endl;
   	if (allExhibitions.size() == 0){
+		std::cout << "allExhibitionss too small" << endl;
   		result = "{\"status\": \"failed\"}";
   	}
   	
   	else {
+		std::cout << "call recieved- else statement" << endl;
   		result = "{\"status\": \"success\", \"exhibitions\":[";
   		bool first = true;
   		for (auto it : allExhibitions) {
@@ -116,7 +118,7 @@ int main(void) {
   		result += "], \"links\":[";
   		
   		first = true;
-  		for (auto link : exhibitionLink){
+  		for (auto link : exhibitionInfo){
   			if (not first) result += ",";
   			result += "\""+ link + "\"";
   			first = false;
@@ -207,7 +209,7 @@ svr.Get(R"(/exhibition/add/(.*)/(.*))", [&](const httplib::Request& req, httplib
 
 	string name = req.matches[1];
 	string link = req.matches[2];
-	cout << "adding link" << endl;
+	std::cout << "adding link" << endl;
 	gldb.addEntry(name,link);
 
 	res.set_content("{\"status\":\"success\"}", "text/json");
@@ -275,7 +277,7 @@ svr.Get(R"(/exhibition/delete/(.*))", [&](const httplib::Request& req, httplib::
 
 
   
-  cout << "Server listening on port " << port << endl;
+  std::cout << "Server listening on port " << port << endl;
   svr.listen("0.0.0.0", port);
   
    

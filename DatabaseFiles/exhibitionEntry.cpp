@@ -3,7 +3,7 @@
 exhibitionEntry::exhibitionEntry() {
 }
 
-exhibitionEntry::exhibitionEntry(sql::SQLString id, sql::SQLString name, sql::SQLString link, sql::string isLink){
+exhibitionEntry::exhibitionEntry(sql::SQLString id, sql::SQLString name, sql::SQLString link, sql::SQLString isLink){
     this->ID = id;
     this->Name = name;
     this->Link = link;

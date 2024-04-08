@@ -15,7 +15,7 @@ public:
      string ID;
      string Name;
      string Link;
-     sting isLink;
+     string isLink;
 
 private:
 
