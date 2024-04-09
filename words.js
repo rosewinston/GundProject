@@ -2,7 +2,7 @@ window.onload = function(argument) {
 	var baseUrl = 'http://138.28.162.217:5005';
 	var exhibitionList;
 	var exhibitionLink;
-	var exbName="";
+	let exhibition="";
 	var exb = document.getElementsByName('exhibition');
 	var id = exb[0].getAttribute( 'id' );
 	var wordsRetrieved = "";
@@ -31,32 +31,30 @@ window.onload = function(argument) {
 	}
 
 	function changeTitle(id,exhibitionList){
-		var exhibition = exhibitionList[id];
-		var title = "<div value='"+id+"'>"+exhibition+"</div>";
+		var exbTitle = exhibitionList[id];
+		var title = "<div value='"+id+"'>"+exbTitle+"</div>";
 		document.querySelector('.title').innerHTML = title;
-		exbName = exhibition;
+		exhibition = exbTitle;
+		console.log(exhibition);
+		wordCloud();
 	}
 
-	console.log(exbName);
 	getAllExhibitions();
-	var canvas = document.getElementById('c');
-	canvas.width = window.innerWidth;
-	canvas.height = window.innerHeight;
 
-	if (canvas.getContext) {
-		var c = canvas.getContext('2d'),
-			w = canvas.width,
-			h = canvas.height;
-
-		c.strokeStyle = 'red';
-		c.lineWidth = 5;
-
-		fetchWords(); 
-		console.log(wordsRetrieved);
-		
-
-
-	console.log(words);
+	function wordCloud(){
+		var canvas = document.getElementById('c');
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
+		if (canvas.getContext) {
+			var c = canvas.getContext('2d'),
+				w = canvas.width,
+				h = canvas.height;
+			c.strokeStyle = 'red';
+			c.lineWidth = 5;
+			fetchWords(); 
+			console.log(wordsRetrieved);
+		console.log(words);
+	}
 		function fetchWords() {
 			// const date = new Date();
 			// let currentDay= String(date.getDate()).padStart(2, '0');
