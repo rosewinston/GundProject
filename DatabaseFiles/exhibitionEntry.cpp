@@ -3,18 +3,16 @@
 exhibitionEntry::exhibitionEntry() {
 }
 
-exhibitionEntry::exhibitionEntry(sql::SQLString id, sql::SQLString name, sql::SQLString link, sql::SQLString isLink){
+exhibitionEntry::exhibitionEntry(sql::SQLString id, sql::SQLString name, sql::SQLString link){
     this->ID = id;
     this->Name = name;
     this->Link = link;
-    this->isLink = isLink;
 }
 
 string exhibitionEntry::text() {
 	string result = ID + ". ";
 	result += Name + " ";
-	result += Link + " ";
-	result += isLink; 
+	result += Link;
 	return result;
 }
 
@@ -22,6 +20,5 @@ string exhibitionEntry::json() {
 	string result = "{\"ID\":\"" + ID + "\",";
 	result += "\"Name\":\"" + Name +  "\",";
 	result += "\"Link\":\"" + Link + "\"}";
-	result += "\"isLink\":\"" + isLink + "\"}";
 	return result;
 }
