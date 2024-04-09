@@ -8,14 +8,13 @@ using namespace std;
 class exhibitionEntry {
 public:
      exhibitionEntry();
-     exhibitionEntry(sql::SQLString ID, sql::SQLString Name, sql::SQLString Link, sql::SQLString isLink);
+     exhibitionEntry(sql::SQLString ID, sql::SQLString Name, sql::SQLString Link);
      string text();
      string json();
      
      string ID;
      string Name;
      string Link;
-     string isLink;
 
 private:
 
