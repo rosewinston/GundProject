@@ -1,9 +1,43 @@
 window.onload = function(argument) {
 	var baseUrl = 'http://138.28.162.217:5005';
+	var exhibitionList;
+	var exhibitionLink;
+	var exbName="";
+	var exb = document.getElementById('exhibition');
+	var id = exb[0].getAttribute( 'id' );
 	var wordsRetrieved = "";
 	var words = {};
 	var words_attr = [];
 	
+	function completeGetExhibitions(results){
+		if (results["status"] != "success") {
+			// document.querySelector('#output').innerHTML = ErrQuery+": get sites";
+			return;
+		}
+		exhibitionList = results['exhibitions'];
+		exhibitionLink = results['links'];
+		changeTitle(id,exhibitionList);
+	}
+	
+	function getAllExhibitions(){
+		fetch(baseUrl+'/response/getAllExhibitions', {
+			method: 'get'	
+		})
+		.then (response => response.json())
+		.then (data =>completeGetExhibitions(data))
+		.catch(error => {
+			{alert("Error: Something went wrong:"+error);}
+		})
+	}
+
+	function changeTitle(id,exhibitionList){
+		var exhibition = exhibitionList[id];
+		var title = "<div value='"+id+"'>"+exhibition+"</div>";
+		document.querySelector('.title').innerHTML = title;
+	}
+
+	getAllExhibitions();
+	exbName = exhibitionList[id];
 	var canvas = document.getElementById('c');
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
@@ -20,8 +54,8 @@ window.onload = function(argument) {
 		console.log(wordsRetrieved);
 		
 
-	
-		console.log(words);
+
+	console.log(words);
 		function fetchWords() {
 			// const date = new Date();
 			// let currentDay= String(date.getDate()).padStart(2, '0');
@@ -33,7 +67,6 @@ window.onload = function(argument) {
 			
 			
 			// timestamp = currentDate;
-			exhibition = [#exhibitionName];
    			fetch(baseUrl + '/retrieve/words/'+exhibition, {
    			method: 'get'
    			})
@@ -147,3 +180,4 @@ window.onload = function(argument) {
 	}
 
 }
+

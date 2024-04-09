@@ -5,7 +5,6 @@ var art_piece="";
 var mytoken = "";
 var inthandle;
 var inthandle2;
-var color = '#343a40';
 var username = "";
 var password = "";
 var word = ""; 
@@ -66,34 +65,6 @@ document.addEventListener("click", e => {
         dropdown.classList.remove('active')
     })
 })
-
-document.addEventListener("DOMContentLoaded", function() {
-    setColor("#343a40");
-  });
-
-document.getElementById('anger').addEventListener("click", (e) => {
-    setColor('red');
-})
-
-document.getElementById('sadness').addEventListener("click", (e) => {
-    setColor('blue');
-})
-
-document.getElementById('joy').addEventListener("click", (e) => {
-    setColor('green');
-})
-
-document.getElementById('confusion').addEventListener("click", (e) => {
-    setColor('cyan');
-})
-
-
-function setColor(color) {
-    document.getElementById('response-navbar').style.backgroundColor = color;}
-
-
-
-
 
 document.getElementById('submit-btn').addEventListener("click", getWord);
 
