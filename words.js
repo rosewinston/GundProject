@@ -3,7 +3,7 @@ window.onload = function(argument) {
 	var exhibitionList;
 	var exhibitionLink;
 	var exbName="";
-	var exb = document.getElementById('exhibition');
+	var exb = document.getElementByNames('exhibition');
 	var id = exb[0].getAttribute( 'id' );
 	var wordsRetrieved = "";
 	var words = {};
