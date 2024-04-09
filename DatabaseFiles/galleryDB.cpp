@@ -78,7 +78,7 @@ vector<string> galleryDB::getWords(string exhibition){
 }
 	
 // Get all exhibitions function
-map<string, string> galleryDB::getAllExhibitions(vector<string> &exhibitionList, vector<string> &exhibitionLink, vector<string> &exhibitionisLink) {
+map<string, string> galleryDB::getAllExhibitions(vector<string> &exhibitionList, vector<string> &exhibitionLink) {
 	map<string, string> list;
 	if (!conn) {
 		cerr << "Invalid database connection" << endl;
@@ -87,21 +87,18 @@ map<string, string> galleryDB::getAllExhibitions(vector<string> &exhibitionList,
 	std::unique_ptr<sql::Statement> stmnt(conn->createStatement());
 	
   	sql::ResultSet *res = stmnt->executeQuery(
-			"SELECT DISTINCT Name, Link, isLink FROM exhibitions"
+			"SELECT DISTINCT Name, Link FROM exhibitions"
 	);
     
     // Loop through and print results
     while (res->next()) {
     	string exhibition;
     	exhibition = res->getString("Name");
-    	string link;	
+    	string link;
     	link = res->getString("Link");
 	    list[exhibition] = link;
 	    exhibitionList.push_back(exhibition);
 	    exhibitionLink.push_back(link);
-		string isLink;
-		isLink = res->getString("isLink");
-		exhibitionisLink.push_back(link);
     }
     
     return list;
@@ -124,7 +121,7 @@ vector<exhibitionEntry> galleryDB::find(string search) {
     
     // Loop through and print results
 	while (res->next()) {
-    	exhibitionEntry entry(res->getString("ID"),res->getString("Name"),res->getString("Link"),res->getString("isLink"));
+    	exhibitionEntry entry(res->getString("ID"),res->getString("Name"),res->getString("Link"));
 	    list.push_back(entry);
 
     }
@@ -133,7 +130,7 @@ vector<exhibitionEntry> galleryDB::find(string search) {
 }
 
 
-void galleryDB::addEntry(string name, string link, string isLink){
+void galleryDB::addEntry(string name, string link){
 
 	if (!conn) {
    		cerr << "Invalid database connection" << endl;
@@ -143,7 +140,7 @@ void galleryDB::addEntry(string name, string link, string isLink){
   	std::auto_ptr<sql::Statement> stmnt(conn->createStatement());
 
   	
-  	stmnt->executeQuery("INSERT INTO exhibitions(Name,Link,isLink) VALUES ('"+name+"','"+link+",'"+isLink+"')");
+  	stmnt->executeQuery("INSERT INTO exhibitions(Name,Link) VALUES ('"+name+"','"+link+"')");
 }
 
 // exhibitionEntry galleryDB::fetchexhibition(string id){
@@ -167,7 +164,7 @@ void galleryDB::addEntry(string name, string link, string isLink){
 //     return entry;
 // }
 
-void galleryDB::editEntry(string idnum,string name,string link, string isLink){
+void galleryDB::editEntry(string idnum,string name,string link){
 	std::unique_ptr<sql::Connection>  conn(driver->connect(db_url, properties));
 	
 	if (!conn) {
@@ -176,7 +173,7 @@ void galleryDB::editEntry(string idnum,string name,string link, string isLink){
   	}
 
   	std::auto_ptr<sql::Statement> stmnt(conn->createStatement());
-  	stmnt->executeQuery("UPDATE exhibitions SET Name = '"+name+"','"+link+",'"+isLink+"' WHERE ID='"+idnum+"'");
+  	stmnt->executeQuery("UPDATE exhibitions SET Name = '"+name+"', Link ='"+link+"' WHERE ID='"+idnum+"'");
 }
 
 
