@@ -89,14 +89,14 @@ int main(void) {
   	vector<string> exhibitionInfo;
   	map<string, string> allExhibitions = gldb.getAllExhibitions(exhibitionList, exhibitionInfo);
   	string result;
-	std::cout << "begin Get" << endl;
+	//std::cout << "begin Get" << endl;
   	if (allExhibitions.size() == 0){
-		std::cout << "allExhibitionss too small" << endl;
+		std::cout << "allExhibitions too small" << endl;
   		result = "{\"status\": \"failed\"}";
   	}
   	
   	else {
-		std::cout << "call recieved- else statement" << endl;
+		// std::cout << "call recieved- else statement" << endl;
   		result = "{\"status\": \"success\", \"exhibitions\":[";
   		bool first = true;
   		for (auto it : allExhibitions) {

@@ -3,7 +3,7 @@ window.onload = function(argument) {
 	var exhibitionList;
 	var exhibitionLink;
 	var exbName="";
-	var exb = document.getElementByNames('exhibition');
+	var exb = document.getElementsByName('exhibition');
 	var id = exb[0].getAttribute( 'id' );
 	var wordsRetrieved = "";
 	var words = {};
@@ -34,10 +34,11 @@ window.onload = function(argument) {
 		var exhibition = exhibitionList[id];
 		var title = "<div value='"+id+"'>"+exhibition+"</div>";
 		document.querySelector('.title').innerHTML = title;
+		exbName = exhibition;
 	}
 
+	console.log(exbName);
 	getAllExhibitions();
-	exbName = exhibitionList[id];
 	var canvas = document.getElementById('c');
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
