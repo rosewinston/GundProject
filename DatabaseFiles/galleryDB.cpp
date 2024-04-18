@@ -32,7 +32,24 @@ galleryDB::galleryDB() {
    	
 }
 
-void galleryDB::addEntryWord(string exhibition, string word){
+string galleryDB::geteID(string exhibition){
+	string eID;
+	if(!conn) {
+		cerr << "Invalid database connection" << endl;
+		exit (EXIT_FAILURE);
+	}
+	
+	std::unique_ptr<sql::Statement> stmnt(conn->createStatement());
+    // Execute query
+    sql::ResultSet *res = stmnt->executeQuery("SELECT exhibitions.Name AS exhibitions_name, word_response.eID AS word_response_eID FROM word_response JOIN exhibitions ON word_response.eID = exhibitions.ID WHERE exhibitions.Name = '"+exhibition+"';");
+    while (res->next())
+	{
+		eID = res->getString("word_response_eID");		
+	}
+    return eID;
+}
+
+void galleryDB::addEntryWord(string eID, string word){
 
 	if (!conn) {
    		cerr << "Invalid database connection" << endl;
@@ -41,24 +58,11 @@ void galleryDB::addEntryWord(string exhibition, string word){
 
   	std::auto_ptr<sql::Statement> stmnt(conn->createStatement());
 
-  	stmnt->executeQuery("INSERT INTO word_response(exhibition, word) VALUES ('"+exhibition+"','"+word+"')");
+  	stmnt->executeQuery("INSERT INTO word_response(eID, word) VALUES ('"+eID+"','"+word+"')");
 }
 
 
-// void galleryDB::addEmotion(string exhibition, string emotion){
-
-// 	if (!conn) {
-//    		cerr << "Invalid database connection" << endl;
-//    		exit (EXIT_FAILURE);
-//   	}
-
-//   	std::auto_ptr<sql::Statement> stmnt(conn->createStatement());
-
-//   	stmnt->executeQuery("INSERT INTO emotion_response(exhibition, emotion) VALUES ('"+exhibition+"','"+emotion+"')");
-// }
-
-
-vector<string> galleryDB::getWords(string exhibition){
+vector<string> galleryDB::getWords(string eID){
 	string word;
 	vector<string> wordList; 
 	if (!conn)
@@ -67,7 +71,7 @@ vector<string> galleryDB::getWords(string exhibition){
 		exit(EXIT_FAILURE);
 	}
 	std::auto_ptr<sql::Statement> stmnt(conn->createStatement());
-	sql::ResultSet *res = stmnt->executeQuery("SELECT word FROM word_response WHERE exhibition = '" + exhibition + "'");
+	sql::ResultSet *res = stmnt->executeQuery("SELECT word FROM word_response WHERE eID = '" + eID + "'");
 	while (res->next())
 	{
 		word = res->getString("word");
@@ -123,10 +127,8 @@ vector<exhibitionEntry> galleryDB::find(string search) {
 	while (res->next()) {
     	exhibitionEntry entry(res->getString("ID"),res->getString("Name"),res->getString("Link"));
 	    list.push_back(entry);
-
     }
     return list;
-
 }
 
 
@@ -142,27 +144,6 @@ void galleryDB::addEntry(string name, string link){
   	
   	stmnt->executeQuery("INSERT INTO exhibitions(Name,Link) VALUES ('"+name+"','"+link+"')");
 }
-
-// exhibitionEntry galleryDB::fetchexhibition(string id){
-
-// 	exhibitionEntry entry;	
-	
-// 	if (!conn) {
-//    		cerr << "Invalid database connection" << endl;
-//    		exit (EXIT_FAILURE);
-//   	}
-
-//   	std::auto_ptr<sql::Statement> stmnt(conn->createStatement());
-
-  	
-//     sql::ResultSet *res = stmnt->executeQuery("SELECT * FROM exhibitions WHERE ID = '"+id+"'");
-    
-//     // Get first entry
-//     if (res->next()) {
-//     	entry = exhibitionEntry(res->getString("ID"),res->getString("Name"), res->getString("Link"));
-//     }
-//     return entry;
-// }
 
 void galleryDB::editEntry(string idnum,string name,string link){
 	std::unique_ptr<sql::Connection>  conn(driver->connect(db_url, properties));
@@ -190,31 +171,3 @@ void galleryDB::deleteEntry(string idnum){
 
   stmt->execute("DELETE FROM exhibitions WHERE ID='"+idnum+"'");
 }
-
-
-// function to summarize results of emotion responses for each exhibition piece
-// void galleryDB::summaryEmotion(vector<string> &emotionVec, vector<string> &exhibitionVec, vector<string> &countVec) {	
-// 	if (!conn) {
-// 		cerr << "Invalid database connection" << endl;
-// 		exit(EXIT_FAILURE);
-// 	}
-// 	std::unique_ptr<sql::Statement> stmnt(conn->createStatement());
-	
-//   	sql::ResultSet *res = stmnt->executeQuery(
-// 			"SELECT emotion, exhibition, COUNT(emotion) as count_emotion FROM emotion_response GROUP BY emotion, exhibition"
-// 	);
-    
-//     // Loop through and print results
-//     while (res->next()) {
-//     	string emotion;
-// 	    emotion = res->getString("emotion");
-//         emotionVec.push_back(emotion);
-//     	string exhibition;
-//     	exhibition = res->getString("exhibition");
-//     	exhibitionVec.push_back(exhibition);
-//     	string countStr;
-//     	countStr = res->getString("count_emotion");
-//     	countVec.push_back(countStr);
-//     	//cout << exhibition << " " << emotion << " " << countInt << endl;
-//     }
-// }

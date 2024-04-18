@@ -56,16 +56,6 @@ window.onload = function(argument) {
 		console.log(words);
 	}
 		function fetchWords() {
-			// const date = new Date();
-			// let currentDay= String(date.getDate()).padStart(2, '0');
-			// let currentMonth = String(date.getMonth()+1).padStart(2,"0");
-			// let currentYear = date.getFullYear();
-			// // format date: year - month - date 
-			// let currentDate = `${currentYear}-${currentMonth}-${currentDay}`;
-			// console.log("Current Date: " + currentDate); 
-			
-			
-			// timestamp = currentDate;
    			fetch(baseUrl + '/retrieve/words/'+exhibition, {
    			method: 'get'
    			})

@@ -1,5 +1,5 @@
 const baseUrl = window.location.origin + ":5005";
-const gundUrl = "https://collection.thegund.org/Media/images/";
+// const gundUrl = "https://collection.thegund.org/Media/images/";
 var state="off";
 var myname="";
 var exhibition="";
@@ -15,17 +15,18 @@ document.getElementById('submit-btn').addEventListener("click", addWord);
 
 getAllExhibitions();
 
+//Create the dropdown list for the site, containing each exhibition with an associated link 
 function siteDropdown(exhibitionList, exhibitionLink) { 
 	var dropdown = "";
 	var countValue = 0;
 	exhibitionList.forEach(function(key){
-		dropdown += "<option value='"+exhibitionLink[countValue]+"'>"+key+"</option>";
+		dropdown += "<option id='"+countValue+"' value='"+exhibitionLink[countValue]+"'>"+key+"</option>";
 		countValue += 1;
 	})
 	
 	var imageList = "";
 	exhibitionLink.forEach(function(key){
-		imageList += "<img id='"+key+"' src='"+gundUrl+key+"' alt='img' draggable='false'>";
+		imageList += "<img id='"+key+"' src='"+key+"' alt='img' draggable='false'>";
 	})
 
 	document.querySelector('#slct').innerHTML = dropdown;
@@ -54,19 +55,6 @@ function getAllExhibitions(){
     })
 }
 
-// apply the event listener to all images
-// document.querySelectorAll('.link').forEach(element => {
-// 	element.addEventListener('click', event => {
-// 		var word = document.getElementById('word-response').value;
-// 		var e = document.getElementById('slct');
-// 		var exhibition = e.options[e.selectedIndex].text;
-// 		console.log(exhibition);
-// 		addWord(exhibition, word);
-		
-// 		// change current displayed art
-// 	});
-// });
-
 function addWord() {
 	var word = document.getElementById('word-response').value;
 	if (word=="") {
@@ -75,6 +63,7 @@ function addWord() {
 	}
 	var e = document.getElementById('slct');
 	var exhibition = e.options[e.selectedIndex].text;
+	console.log(exhibition);
 	fetch(baseUrl+'/response/word/'+exhibition+'/'+word, {
         method: 'get'
     })
@@ -86,32 +75,12 @@ function addWord() {
 }
 
 function completeAddWord(results){
-	var exhibition = results['exhibition'];
+	var eID = results['eID'];
 	var word = results['word'];
-	console.log("Exhibition: "+exhibition+", Word: "+word);	
+	console.log("Exhibition ID: "+eID+", Word: "+word);	
 	alert("Success! Response recorded!")
 	clearTextbox();
 }
-
-// function getWord() {
-//    word = document.getElementById('word-response').value;
-//    fetch(baseUrl + '/response/word/'+word, {
-//     method: 'get'
-//    })
-//    .then(response => response.json())
-//    .then(data => completeGetWord(data))
-//    .catch(error => {
-//     {alert("Error: Something went wrong:" + error); }
-//    })
-// }
-
-
-// function completeGetWord(results){
-// 	var word = results['word'];
-// 	console.log("Word: "+word);
-// 	clearTextbox();
-// 	alert("Success! Word added");
-// }
 
 // Clears up the textbox once the word is sent
 function clearTextbox() {
@@ -130,10 +99,8 @@ document.getElementById("slct").addEventListener("click",selectExhibition);
 
 // Code that changes the image on the slider when dropdown option is selected
 var dropdownList = document.getElementById('slct');
-
-
 dropdownList.addEventListener('change', event => {
 	currentLink = dropdownList.options[dropdownList.selectedIndex].value;
 	console.log(currentLink);
-	document.querySelector('.slider').innerHTML = "<img id='"+currentLink+"' src='"+gundUrl+currentLink+"' alt='img' draggable='false'>";
+	document.querySelector('.slider').innerHTML = "<img id='"+currentLink+"' src='"+currentLink+"' alt='img' draggable='false'>";
 });

@@ -27,27 +27,21 @@ public:
     //default constructor to create object to allow for interaction w/ database 
     galleryDB();
     //add user's word entry to word table in database 
-    void addEntryWord(string exhibition, string word); 
+    void addEntryWord(string eID, string word); 
     //get all words within the database word table for a certain exhibition 
     vector<string> getWords(string exhibition); 
-    //add user's emotion entry to emotion table in database
-        //void addEmotion(string art_piece, string emotion);
     // function to get all exhibition names
     map<string, string> getAllExhibitions(vector<string> &exhibitionList, vector<string> &exhibitionLink);
     //find exhibition matching string
     vector<exhibitionEntry> find(string search);
-    //get exhibition that matches with the ID given
-    exhibitionEntry fetchExhibition(string id);
+    //return eID from exhibition name
+    string geteID(string exhibition);
     // add exhibition to DB
     void addEntry(string name, string link);
     //edit exhibition name in DB
     void editEntry(string idnum,string name,string link);
     //delete exhibition in DB
     void deleteEntry(string idnum);
-    
-    // function to summarize results of emotion responses for each art piece
-        //void summaryEmotion(vector<string> &emotionVec, vector<string> &artVec, vector<string> &countVec);
-   
     
 private:
     const string db_url=DB_URL;
