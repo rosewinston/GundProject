@@ -47,6 +47,22 @@ string getWordJSON(vector<string> &wordList){
 	return res;
 }
 
+//Replaces all occurances of a string within a string
+string ReplaceAll(string str, const string& from, const string& to) {
+    size_t start_pos = 0;
+    while((start_pos = str.find(from, start_pos)) != std::string::npos) {
+        str.replace(start_pos, from.length(), to);
+        start_pos += to.length(); // Handles case where 'to' is a substring of 'from'
+    }
+    return str;
+}
+
+// Takes string and replaces all occurances of "-SLASH-" with "/" and "|" with "?" to fix the URL for display
+string decryptUrl(string url){
+	string fixedUrl = ReplaceAll(url,"-SLASH-","/");
+	fixedUrl = ReplaceAll(fixedUrl,"|","?");
+	return fixedUrl;
+}
 
 int main(void) {
   Server svr;
@@ -173,7 +189,8 @@ int main(void) {
 
 		string name = req.matches[1];
 		string link = req.matches[2];
-		std::cout << "adding link" << endl;
+		std::cout << "adding exhibition" << endl;
+		link = decryptUrl(link);
 		gldb.addEntry(name,link);
 
 		res.set_content("{\"status\":\"success\"}", "text/json");
@@ -186,6 +203,7 @@ int main(void) {
 		string ID = req.matches[1];
 		string name = req.matches[2];
 		string link = req.matches[3];
+		link = decryptUrl(link);
 		gldb.editEntry(ID,name,link);
 		res.set_content("{\"status\":\"success\"}", "text/json");
 		res.status = 200;

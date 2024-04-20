@@ -55,6 +55,7 @@ function getAllExhibitions(){
     })
 }
 
+// adds word to database and sends the associated exhibition along with it
 function addWord() {
 	var word = document.getElementById('word-response').value;
 	if (word=="") {

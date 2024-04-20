@@ -81,7 +81,9 @@ function addExhibition() {
     console.log("Attempting to add an entry");
     console.log("Exhibitionname:" + $('#addname').val());
     $('#searchresults').empty();
-    fetch(baseUrl + '/exhibition/add/' + document.getElementById("addname").value + "/" + document.getElementById("addlink").value, {
+    var url = document.getElementById("addlink").value;
+    url = encryptUrl(url);
+    fetch(baseUrl + '/exhibition/add/' + document.getElementById("addname").value + "/" + url, {
             method: 'get'
         })
         .then(response => response.json())
@@ -93,6 +95,12 @@ function addExhibition() {
         })
 }
 
+// Takes string and replaces all occurances of "/" with "-SLASH-" and "?" with "|" for use in sending URLS through fetch functions
+function encryptUrl(url){
+	var fixedUrl = url.replace(/\//g, '-SLASH-')
+    fixedUrl = fixedUrl.replace(/\?/g,'|');
+	return fixedUrl;
+}
 
 function editExhibition(row) {
     console.log("start edit data: "+row+JSON.stringify(exhibitionList[row]));
@@ -115,8 +123,11 @@ function updateExhibition() {
 	id = modal.getAttribute("editid");
 	
     console.log("Attempting to edit an entry:"+id); 
-
-    fetch(baseUrl + '/exhibition/update/' + id + '/' + document.getElementById("editname").value + '/' + document.getElementById("editlink").value, {
+    var url = document.getElementById("editlink").value;
+    console.log(url);
+    var link = encryptUrl(url);
+    console.log(link);
+    fetch(baseUrl + '/exhibition/update/' + id + '/' + document.getElementById("editname").value + '/' + link, {
                 method: 'get'
             })
         .then(alert("Record for " + document.getElementById("editname").value + " updated"))
