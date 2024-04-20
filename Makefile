@@ -46,6 +46,7 @@ PutHTML:
 	cp words3.html /var/www/html/gallery/
 	cp words.css /var/www/html/gallery/
 	cp words.js /var/www/html/gallery/
+	cp assets/favicon.ico /var/www/html/gallery/assets
 
 	
 	echo "Current contents of your HTML directory: "
