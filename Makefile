@@ -34,7 +34,6 @@ PutHTML:
 	cp GalleryFeedback.html /var/www/html/gallery/
 	cp galleryFeedback.js /var/www/html/gallery/
 	cp -R css /var/www/html/gallery/
-	cp gallery.js /var/www/html/gallery/
 	cp index.html /var/www/html/gallery/
 	cp LandingPage.js /var/www/html/gallery/
 	cp -R gund_img /var/www/html/gallery/
