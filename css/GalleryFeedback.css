@@ -17,24 +17,28 @@
 }
 
 *{
-    margin: 0px;
-    padding:0px ;
     box-sizing: border-box;
     font-family: 'Gund Gallery';
 }
 
-.body{
-    height: 100vh;
-}
+
 
 .background-image{
     background: linear-gradient(rgba(0,0,0,0.50), rgba(0,0,0,0.50));
+}
+html {
+    min-height: 100%;
+    overflow-y: hidden;
+}    
+
+body {
+    min-height: 100%;
 }
 
 img {
     height: 100vh;
     width: 100%;
-    object-fit: cover;
+    object-fit: fill;
 }
 
 .content-section{
@@ -86,6 +90,11 @@ img {
     background:#283618;
 }
 
+.select{
+  /* position: absolute; */
+  transform: translate(-30%);
+    display:inside;
+}
 
 .container{
     width: 80vw;
