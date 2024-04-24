@@ -4,21 +4,21 @@ const baseUrl = window.location.origin + ":5005";
 const imageUrl = "https://collection.thegund.org/Media/images/"
 
 /* Set up events */
-$(document).ready(function() {
-	// Add a click event for the filter button
-	document.querySelector("#filter-btn").addEventListener("click", (e) => {
-		var searchStr = 	document.querySelector("#search").value;
-    	findMatches(searchStr);
-	});
+// $(document).ready(function() {
+// 	// Add a click event for the filter button
+// 	document.querySelector("#filter-btn").addEventListener("click", (e) => {
+// 		var searchStr = 	document.querySelector("#search").value;
+//     	findMatches(searchStr);
+// 	});
 
-    $(".dropdown-menu li a").click(function() {
-        var selection = $(this).text();
-        $(this).parents(".btn-group").find('.btn').html(selection + ' <span class="caret"></span>');
-    });
+//     $(".dropdown-menu li a").click(function() {
+//         var selection = $(this).text();
+//         $(this).parents(".btn-group").find('.btn').html(selection + ' <span class="caret"></span>');
+//     });
 
 	findMatches(" ");
 
-});
+// });
 
 /* Search and display exhibition functions */
 
@@ -30,7 +30,6 @@ function formatMatches(json) {
         result += "<tr><td class='Name'>" + entry['Name'] + "</td><td class='Link'>" + entry['Link'];
         result += "<td><button type='button' class='btn btn-primary btn-sm edit' data-bs-toggle='modal' data-bs-target='#editExhibition' ";
         result += "onclick=\"editExhibition(" + i + ")\">Edit</button> ";
-        result += "<button type='button' class='btn btn-primary btn-sm ' onclick=\"deleteEntry("+ entry['ID'] +")\">Delete</button></td></tr>";
     });
     result += "</table>";
 
