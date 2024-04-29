@@ -37,25 +37,19 @@ function setupButtons(){
     $('.radio-buttons label').click(function() {
 		$(this).addClass('btn-primary').removeClass('btn-light');
         var id = $('#'+$(this).attr('for')).attr('id');
-   	 	var val = $('#'+$(this).attr('for')).val();
-		// const buttons = document.getElementById("exb_buttons");
-		// 	for (const child of buttons.children) {
-		// 		if (child.value != this.value) {
-		// 			console.log("remove");
-		// 	$(child).addClass('btn-light').removeClass('btn-primary');
-		// 		}
-		// 	}
-		updateSettings(id,val);
-		// console.log($(this));
+   	 	var val = $(this).text();
+		// Remove the 'btn-primary' class from siblings and add 'btn-light'
+		$(this).siblings('label').removeClass('btn-primary').addClass('btn-light');
+		selectExhibition(id,val);
     });
 };
 
-function updateSettings(id,value){
-    console.log('clicked : ' +id+' ,Value: '+value);
+function selectExhibition(ExhibitionID,value){
+    console.log('EID : ' +ExhibitionID+' ,Name: '+value);
 }
 
 //Create the radio buttons for the site, containing each exhibition with an associated link 
-function siteDropdown(exhibitionList, exhibitionLink) { 
+function siteButtons(exhibitionList, exhibitionLink) { 
 	var buttons = "";
 	var countValue = 0;
 	var classInfo = "btn btn-light col-6 col-sm-4 btn";
@@ -78,12 +72,12 @@ function siteDropdown(exhibitionList, exhibitionLink) {
 
 function completeGetExhibitions(results){
 	if (results["status"] != "success") {
-		// document.querySelector('#output').innerHTML = ErrQuery+": get sites";
+		document.querySelector('#output').innerHTML = ErrQuery+": get sites";
 		return;
 	}
 	exhibitionList = results['exhibitions'];
 	exhibitionLink = results['links'];
-	siteDropdown(exhibitionList, exhibitionLink);
+	siteButtons(exhibitionList, exhibitionLink);
 }
 
 function getAllExhibitions(){
@@ -131,12 +125,12 @@ function clearTextbox() {
 }
 
 // Function and listener for selecting exhibition
-function selectExhibition(){
-	var e = document.getElementById("slct");
-	var exhibitionName = e.options[e.selectedIndex].text;
-	var label = "Share a word that encapsulates how "+exhibitionName+" made you feel!"
-	document.querySelector('label').innerHTML = label;
-}
+// function selectExhibition(){
+// 	var e = document.getElementById("slct");
+// 	var exhibitionName = e.options[e.selectedIndex].text;
+// 	var label = "Share a word that encapsulates how "+exhibitionName+" made you feel!"
+// 	document.querySelector('label').innerHTML = label;
+// }
 
 // document.getElementById("slct").addEventListener("click",selectExhibition);
 
