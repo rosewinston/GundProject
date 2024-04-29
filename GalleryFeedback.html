@@ -14,39 +14,27 @@
 
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" >
-        <link href="css/GalleryFeedback.css" type="text/css" rel="stylesheet" >
+        <!-- <link href="css/GalleryFeedback.css" type="text/css" rel="stylesheet" > -->
     </head>
     <body>
-        <div class="background-image">
-            <img src= "gund_img/gund3.jpeg" alt="background image of Gund Gallery">
+        <header style="text-align: center">
+            The Gund - Exhibition Feedback
+        </header>
+        <div class = "container">            
+            <div class="row" style="padding-block: 10px;">
+                <div class = "row radio-buttons" id="radio-buttons" style="justify-content: space-around; padding-block:10px;">
+                        <input type="radio" class="btn-check" name="options" id="0" autocomplete="off">
+                        <label class="btn btn-light col-6 col-sm-4 btn" for="0" id="exb_buttons">Exhibition 1</label>
+                        <input type="radio" class="btn-check" name="options" id="1" autocomplete="off">
+                        <label class="btn btn-light col-6 col-sm-4 btn" for="1" id="exb_buttons">Exhibition 2</label>
+                        <input type="radio" class="btn-check" name="options" id="2" autocomplete="off">
+                        <label class="btn btn-light col-6 col-sm-4 btn" for="2" id="exb_buttons">Exhibition 3</label>
+                        <input type="radio" class="btn-check" name="options" id="3" autocomplete="off">
+                        <label class="btn btn-light col-6 col-sm-4 btn" for="3" id="exb_buttons">Exhibition 4</label>
+                </div>  
+            </div> 
         </div>
-        <div class = "content-section">            
-            <div class="word-box" style="padding-top:3rem; margin-inline:auto;">
-                <div class="selector-container" style="padding-top:3rem; text-align:center;"> <!-- selector section begin-->
-                    <div class="select">
-                        <select name="slct" id="slct" style="text-align:center; display:inline;">
-                            <option>Loading...</option>
-                        </select>
-                    </div>
-                </div> <!-- Selector section end-->
-                <div class="label">
-                    <label>Select an Exhibition!</label>
-                </div>
-                <input type="text" class="form-control" id="word-response">
-                <button class="btn btn-primary" id="submit-btn">Submit Response!</button>
-            </div>
-            <div class="flex-container">
-                <div class="carousel-container">
-                <div class="slider">
-                    <img id="slide-1" src="gund_img/gund1.jpeg" alt="Exhibition 1 Image" draggable="false">
-                </div>
-            </div>
-            </div>
-             <div>   
-                <a href="index.html" class="previous">Previous</a>
-                <a href="words.html" class="next">Next</a>  
-            </div>    
-        </div>   
-        <script src="galleryFeedback.js"></script>   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> 
+        <script src="galleryFeedback.js"></script>  
     </body>
 </html>
