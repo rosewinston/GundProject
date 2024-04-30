@@ -129,5 +129,10 @@ function completeAddWord(results){
 	var eID = results['eID'];
 	var word = results['word'];
 	console.log("Exhibition ID: "+eID+", Word: "+word);	
-	alert("Success! Response recorded!")
+	clearTextbox();
+	alert("Success! Response recorded!");
+}
+
+function clearTextbox() {
+    document.getElementById('word-response').value = "";
 }

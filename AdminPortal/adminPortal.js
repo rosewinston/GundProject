@@ -24,12 +24,16 @@ const imageUrl = "https://collection.thegund.org/Media/images/"
 
 // Build output table from comma delimited list
 function formatMatches(json) {
-
+    var num="";
     var result = '<table class="table table-success table-striped""><tr><th>Name</th><th>Link</th><th>Action</th><tr>';
     json.forEach(function(entry, i) {
         result += "<tr><td class='Name'>" + entry['Name'] + "</td><td class='Link'>" + entry['Link'];
         result += "<td><button type='button' class='btn btn-primary btn-sm edit' data-bs-toggle='modal' data-bs-target='#editExhibition' ";
         result += "onclick=\"editExhibition(" + i + ")\">Edit</button> ";
+        if (i==0){
+            var i="";
+        }
+        result += "<td><a class='btn btn-primary btn-sm edit' data-bs-toggle='modal' href=\"./words"+i+".html\">Word Cloud</a>";
     });
     result += "</table>";
 
