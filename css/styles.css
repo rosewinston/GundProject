@@ -104,6 +104,27 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+@font-face {
+  font-family: "Gund Gallery";
+  src: url('Gund-sans/GundSans-Regular.otf') format("opentype");
+}
+
+@font-face {
+  font-family: "Gund Gallery";
+  font-weight: bold;
+  src: url("Gund-sans/GundSans-Bold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Gund Gallery";
+  font-style: italic;
+  src: url(Gund-sans/GundSans-RegularItalic.otf) format("opentype");
+}
+
+*{
+  font-family: 'Gund Gallery';
+}
+
 hr {
   margin: 1rem 0;
   color: inherit;
@@ -339,6 +360,9 @@ th {
 
 label {
   display: inline-block;
+  width:25%;
+  height:75%;
+  text-align:center;
 }
 
 button {
@@ -2949,8 +2973,8 @@ textarea.form-control-lg {
 
 .btn-light {
   --bs-btn-color: #000;
-  --bs-btn-bg: #f8f9fa;
-  --bs-btn-border-color: #f8f9fa;
+  --bs-btn-bg: #e1e3e4;
+  --bs-btn-border-color: #c8c9ca;
   --bs-btn-hover-color: #000;
   --bs-btn-hover-bg: #d3d4d5;
   --bs-btn-hover-border-color: #c6c7c8;

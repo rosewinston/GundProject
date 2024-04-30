@@ -10,8 +10,7 @@ var color = '#343a40';
 var exhibitionList = [];
 var exhibitionLink = [];
 var word = ""; 
-
-// document.getElementById('submit-btn').addEventListener("click", addWord); 
+document.getElementById('submit-btn').addEventListener("click", addWord); 
 
 getAllExhibitions();
 
@@ -46,23 +45,40 @@ function setupButtons(){
 
 function selectExhibition(ExhibitionID,value){
     console.log('EID : ' +ExhibitionID+' ,Name: '+value);
+	var question = "Share a word that encapsulates how "+value+" made you feel!"
+	document.querySelector('#question').innerHTML = question;
+	exhibition = value;
+	changeImage(ExhibitionID);
+	document.getElementById("word_submission").style.visibility = "visible"; 
+	document.getElementById("img_container").style.visibility = "visible"; 
+	
+}
+
+function changeImage(eID){
+	var image="";
+	for (let i=0; i<4; i++) {
+		var ExbLink = exhibitionLink[i];
+		if (i==eID) {
+		image = "<img id='"+ExbLink+"' src='"+ExbLink+"' alt='img' draggable='false'>";
+		}
+	}
+	document.querySelector('#img_container').innerHTML = image;
 }
 
 //Create the radio buttons for the site, containing each exhibition with an associated link 
-function siteButtons(exhibitionList, exhibitionLink) { 
+function siteButtons(exhibitionList) { 
 	var buttons = "";
 	var countValue = 0;
-	var classInfo = "btn btn-light col-6 col-sm-4 btn";
+	var classInfo = "btn btn-light col-5 btn";
 	exhibitionList.forEach(function(key){
+		if (key!=""){
 		buttons += '<input type="radio" class="btn-check" name="options" id="'+countValue+'" autocomplete="off">'
-		buttons += "<label class='"+classInfo+"' for='"+countValue+"'id='exb_buttons'>"+key+"</label>";
+		buttons += "<label class='"+classInfo+"' for='"+countValue+"'id='exb_buttons' style='margin-top: 10px; font-size:20px;'>"+key+"</label>";
+		}
 		countValue += 1;
 	})
 	
-	var imageList = "";
-	exhibitionLink.forEach(function(key){
-		imageList += "<img id='"+key+"' src='"+key+"' alt='img' draggable='false'>";
-	})
+	
 
 	document.querySelector('#radio-buttons').innerHTML = buttons;
 	setupButtons();
@@ -98,8 +114,6 @@ function addWord() {
 		alert("Please enter a word");
 		return;
 	}
-	var e = document.getElementById('slct');
-	var exhibition = e.options[e.selectedIndex].text;
 	console.log(exhibition);
 	fetch(baseUrl+'/response/word/'+exhibition+'/'+word, {
         method: 'get'
@@ -116,28 +130,4 @@ function completeAddWord(results){
 	var word = results['word'];
 	console.log("Exhibition ID: "+eID+", Word: "+word);	
 	alert("Success! Response recorded!")
-	clearTextbox();
 }
-
-// Clears up the textbox once the word is sent
-function clearTextbox() {
-    document.getElementById('word-response').value = "";
-}
-
-// Function and listener for selecting exhibition
-// function selectExhibition(){
-// 	var e = document.getElementById("slct");
-// 	var exhibitionName = e.options[e.selectedIndex].text;
-// 	var label = "Share a word that encapsulates how "+exhibitionName+" made you feel!"
-// 	document.querySelector('label').innerHTML = label;
-// }
-
-// document.getElementById("slct").addEventListener("click",selectExhibition);
-
-// Code that changes the image on the slider when dropdown option is selected
-// var dropdownList = document.getElementById('slct');
-// dropdownList.addEventListener('change', event => {
-// 	currentLink = dropdownList.options[dropdownList.selectedIndex].value;
-// 	console.log(currentLink);
-// 	document.querySelector('.slider').innerHTML = "<img id='"+currentLink+"' src='"+currentLink+"' alt='img' draggable='false'>";
-// });

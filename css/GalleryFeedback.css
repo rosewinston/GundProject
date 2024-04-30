@@ -22,75 +22,57 @@
 }
 
 img {
-    height: 100vh;
-    width: 100%;
-    object-fit: cover;
+    /* object-fit: fill; */
+    /* max-height:100%; */
+    height:auto;
+    max-width:100%;
 }
 
-.btn {
-    background: #606c38;
-    border: #606c38;
+.word-box {
+    width: 50vh;
+    height: auto;
+    text-align: center;
+    text-decoration: none;
+    font-size: 25px;
     color: #fff;
-    margin-top: 25px;
-    font-size: 20px;
+    margin: auto;
+    padding: 10px 0px 10px 10px;
+    line-height: 1.5;
+    opacity: 95%;
 }
 
-.btn:hover{
-    background:#283618;
+.submit-btn {
+  background: #606c38;
+  border: #606c38;
+  color: #fff;
+  margin-top: 25px;
+  font-size: 20px;
+}
+
+.submit-btn:hover{
+  background:#283618;
 }
 
 .select{
   transform: translate(-45%);
-    display:inside;
-}
-
-.carousel-container {
-    padding: 50px 50px;
-    position: relative;
-    max-width: 40rem;
-    margin: 0 auto;
-    /* background: brown; */
-}
-
-.slider-wrapper {
-    position: relative;
-    max-width: 36rem;
-    margin: 0 auto;
-}
-
-.slider {
-    display: flex;
-    /* width: 40vw; */
-    height: 40vh;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    border-radius: 0.5rem;
-}
-
-.slider img{
-    flex: 0 0 100%;
-    width: 100%;
-    height: auto;
-    scroll-snap-align: start;
-    object-fit: cover;
+  display:inside;
 }
 
 .link {
-    background:#606c38;
-    border: #606c38;
-    border-radius: 5px;
-    padding: 5px 10px;
-    color: #fff;
-    margin-top: 0px;
-    font-size: 20px;
-    cursor:pointer;
+  background:#606c38;
+  border: #606c38;
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: #fff;
+  margin-top: 0px;
+  font-size: 20px;
+  cursor:pointer;
 }
 
 a {
-    text-decoration: none;
-    display: inline-flex;
-    padding: 5px 16px;
+  text-decoration: none;
+  display: inline-flex;
+  padding: 5px 16px;
   }
   
   a:hover {
@@ -116,18 +98,4 @@ a {
     right: 100px;
     border-radius: 10px;
     opacity: 75%;
-  }
-
-/* Large devices (desktops) */
-  @media only screen and (min-width: 992px) {
-  
-    .content-section h1 {
-      font-size: 50px;
-    }
-  
-    .word-box {
-      width: 50vh;
-      font-size: 25px;
-    }
-  
   }

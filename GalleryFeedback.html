@@ -14,11 +14,13 @@
 
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" >
-        <!-- <link href="css/GalleryFeedback.css" type="text/css" rel="stylesheet" > -->
+        <link href="css/GalleryFeedback.css" type="text/css" rel="stylesheet" >
     </head>
     <body>
         <header style="text-align: center">
-            The Gund - Exhibition Feedback
+            <h2>
+            The Gund — Exhibition Feedback
+            </h2>
         </header>
         <div class = "container">            
             <div class="row" style="padding-block: 10px;">
@@ -32,7 +34,17 @@
                         <input type="radio" class="btn-check" name="options" id="3" autocomplete="off">
                         <label class="btn btn-light col-6 col-sm-4 btn" for="3" id="exb_buttons">Exhibition 4</label>
                 </div>  
-            </div> 
+            </div>
+        </div>
+        <div class="container" id="word_submission" style="margin-top:10vh; text-align:center; visibility:hidden;">
+            <div style="visibility:visible;">
+                <h2 id="question">Select an Exhibition!</h2>
+            </div>
+            <input type="text" class="form-control" id="word-response">
+            <button class="btn btn-primary btn-lg" id="submit-btn" style="margin-top:1vh;">Share a Word!</button>
+        </div>
+        <div class="container" id="img_container" style="visibility: hidden; align-content:center;">
+            <img></img>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> 
         <script src="galleryFeedback.js"></script>  
