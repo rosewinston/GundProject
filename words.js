@@ -2,16 +2,18 @@ window.onload = function(argument) {
 	var baseUrl = 'http://138.28.162.217:5005';
 	var exhibitionList;
 	var exhibitionLink;
-	let exhibition="";
+	var exhibition="";
 	var exb = document.getElementsByName('exhibition');
 	var id = exb[0].getAttribute( 'id' );
 	var wordsRetrieved = "";
 	var words = {};
 	var words_attr = [];
-	
+	var canvas = document.getElementById('c');
+	const fullscreenButton = document.getElementById('fullscreen-button');
+	let page = document.documentElement;
+
 	function completeGetExhibitions(results){
 		if (results["status"] != "success") {
-			// document.querySelector('#output').innerHTML = ErrQuery+": get sites";
 			return;
 		}
 		exhibitionList = results['exhibitions'];
@@ -40,11 +42,36 @@ window.onload = function(argument) {
 	}
 
 	getAllExhibitions();
+	fullscreenButton.addEventListener('click', setFullscreen);
+	
+	window.addEventListener("keydown", (event) => {
+		if (event.key == "x") {
+			closeFullscreen();
+		}
+	});
+
+	function setFullscreen(){
+		if (page.requestFullscreen) {
+			page.requestFullscreen();
+		} else if (page.mozRequestFullScreen) { /* Firefox */
+			page.mozRequestFullScreen();
+		} else if (page.webkitRequestFullscreen) { /* Safari */
+			page.webkitRequestFullscreen();
+		} else if (page.msRequestFullscreen) { /* Internet Explorer */
+			page.msRequestFullscreen();
+		}
+		canvas.classList.add("hidecursor");
+	}
+
+	function closeFullscreen(){
+		document.exitFullscreen();
+		canvas.classList.remove("hidecursor");
+	}
 
 	function wordCloud(){
-		var canvas = document.getElementById('c');
 		canvas.width = window.innerWidth;
 		canvas.height = window.innerHeight;
+		console.log(canvas.height);
 		if (canvas.getContext) {
 			var c = canvas.getContext('2d'),
 				w = canvas.width,
@@ -54,6 +81,7 @@ window.onload = function(argument) {
 			fetchWords(); 
 			console.log(wordsRetrieved);
 		console.log(words);
+
 	}
 		function fetchWords() {
    			fetch(baseUrl + '/retrieve/words/'+exhibition, {

@@ -25,6 +25,9 @@ header {
   color: white;
 }
 
+.hidecursor {
+  cursor: none;
+}
 
 body{
   background:#141414;

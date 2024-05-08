@@ -14,24 +14,6 @@ document.getElementById('submit-btn').addEventListener("click", addWord);
 
 getAllExhibitions();
 
-/* Code to operate radio buttons */
-// $('#radio-buttons label').click( function() {
-// 	$(this).addClass('btn-primary').removeClass('btn-light');
-// 	console.log("click button");
-// 	// var wz = document.getElementById('wlan_zone');
-// 	// console.log(wz.value,this.value)
-// 	// wz.value = this.value;
-// 	// console.log(wz.value,this.value)
-
-// 	// const buttons = document.getElementById("zone_buttons");
-// 	// for (const child of buttons.children) {
-// 	// 	if (child.value != this.value) {
-// 	// 		console.log("remove");
-// 	// $(child).addClass('btn-light').removeClass('btn-primary');
-// 	// 	}
-// 	// }
-// });
-
 function setupButtons(){
     $('.radio-buttons label').click(function() {
 		$(this).addClass('btn-primary').removeClass('btn-light');
@@ -82,7 +64,6 @@ function siteButtons(exhibitionList) {
 
 	document.querySelector('#radio-buttons').innerHTML = buttons;
 	setupButtons();
-	// document.querySelector('.slider').innerHTML = imageList;
 	return;
 }
 
