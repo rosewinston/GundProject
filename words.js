@@ -8,6 +8,7 @@ window.onload = function(argument) {
 	var wordsRetrieved = "";
 	var words = {};
 	var words_attr = [];
+	const wordcount = new Map();
 	var canvas = document.getElementById('c');
 	const fullscreenButton = document.getElementById('fullscreen-button');
 	let page = document.documentElement;
@@ -102,6 +103,12 @@ window.onload = function(argument) {
 			if (result["status"]=="success"){
 				var wordList = result["words"]; 
 				wordList.forEach(function (wordElement) {
+					if (wordcount.has(wordElement)) {
+						wordcount.set(wordElement,wordcount.get(wordElement)+1);
+					}
+					else {
+						wordcount.set(wordElement, 1);
+					}
 					if (first){
 						formattedString+=wordElement; 
 						first = false; 
@@ -162,7 +169,7 @@ window.onload = function(argument) {
 			for (var i = 0; i < words_attr.length; i++) {
 				if (words_attr[i].x > w) {
 					words_attr[i].x = -words_attr[i].width;
-					words_attr[i].y = Math.random()*h;
+					words_attr[i].y = (Math.random()*h)+wordcount.get(words_attr[i].text);
 				}else{
 					words_attr[i].x += words_attr[i].speed;
 				}
@@ -185,7 +192,6 @@ window.onload = function(argument) {
 		for (var i = 0; i < word_array.length; i++) {
       var u = Math.random();
       occurance =  -Math.log(u)/(lamda);
-      // Should set. this to the number of occurances of word
 			words[word_array[i]] = occurance;
 		}
 	
